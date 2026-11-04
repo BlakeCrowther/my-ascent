@@ -19,7 +19,7 @@ export const CarouselThumb: React.FC<PropType> = (props) => {
         <div
           className={`absolute inset-0 rounded-md transition-all ${
             selected
-              ? "border-2 border-white/60 bg-white/5 ring-2 ring-white/80 ring-offset-2 ring-offset-transparent"
+              ? "border-wine/60 ring-wine/80 border-2 bg-white/10 ring-2 ring-offset-2 ring-offset-transparent"
               : "opacity-50 hover:opacity-75"
           }`}
         />

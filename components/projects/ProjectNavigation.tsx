@@ -41,7 +41,7 @@ export function ProjectNavigation({
           size="icon"
           onClick={onPrevious}
           disabled={!canScrollPrev}
-          className="glass text-foreground h-8 w-8 rounded-full disabled:opacity-50"
+          className="panel text-ink h-8 w-8 rounded-full disabled:opacity-50"
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
@@ -50,7 +50,7 @@ export function ProjectNavigation({
           size="icon"
           onClick={onNext}
           disabled={!canScrollNext}
-          className="glass text-foreground h-8 w-8 rounded-full disabled:opacity-50"
+          className="panel text-ink h-8 w-8 rounded-full disabled:opacity-50"
         >
           <ChevronRight className="h-4 w-4" />
         </Button>
@@ -66,8 +66,8 @@ export function ProjectNavigation({
             onClick={() => onDotClick(index)}
             className={`h-2 w-2 rounded-full p-0 transition-all ${
               index === selectedIndex
-                ? "bg-black"
-                : "bg-black/30 hover:bg-black/50"
+                ? "bg-white"
+                : "bg-white/50 hover:bg-white/75"
             }`}
           />
         ))}

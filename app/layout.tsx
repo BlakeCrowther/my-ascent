@@ -1,11 +1,16 @@
 import "./globals.css";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Sans } from "next/font/google";
 
 import type { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
 });
 
@@ -125,7 +130,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ios-vh-fix antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSans.variable} ios-vh-fix antialiased`}
       >
         {children}
       </body>

@@ -160,7 +160,7 @@ export function ProjectsSection() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           transition={{ duration: 1, delay: 0.1 }}
-          className="glass rounded-xl"
+          className="panel rounded-xl"
         >
           <CommandInput
             placeholder="Search for a project or filter by specific skills and tools..."
@@ -189,7 +189,7 @@ export function ProjectsSection() {
                         {filteredSkills.length > 5 && (
                           <CommandItem
                             onSelect={() => setShowMoreSkills(!showMoreSkills)}
-                            className="cursor-pointer text-white/60 italic"
+                            className="text-ink-soft cursor-pointer italic"
                           >
                             <span className="flex items-center gap-2">
                               {showMoreSkills ? (
@@ -224,7 +224,7 @@ export function ProjectsSection() {
                         {filteredTools.length > 5 && (
                           <CommandItem
                             onSelect={() => setShowMoreTools(!showMoreTools)}
-                            className="cursor-pointer text-white/60 italic"
+                            className="text-ink-soft cursor-pointer italic"
                           >
                             <span className="flex items-center gap-2">
                               {showMoreTools ? (
@@ -263,12 +263,12 @@ export function ProjectsSection() {
           {selectedFilters.map((filter) => (
             <div
               key={filter}
-              className="inline-flex gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm text-white/80"
+              className="bg-petal border-petal-edge text-wine inline-flex gap-2 rounded-full border px-3 py-1 text-sm"
             >
               <span>{filter}</span>
               <button
                 onClick={() => handleRemoveFilter(filter)}
-                className="rounded-full p-1 transition-colors hover:bg-white/20"
+                className="hover:bg-petal-deep rounded-full p-1 transition-colors"
                 aria-label={`Remove ${filter} filter`}
               >
                 <X className="h-3 w-3" />
@@ -296,7 +296,7 @@ export function ProjectsSection() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           transition={{ duration: 1, delay: 0.25 }}
-          className="-mt-3 text-sm text-white/60"
+          className="-mt-3 text-sm text-white/90 drop-shadow"
         >
           Showing {filteredProjects.length} of {projects.length} projects
         </motion.div>
@@ -336,12 +336,12 @@ export function ProjectsSection() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           transition={{ duration: 1, delay: 0.3 }}
-          className="glass rounded-xl p-8 text-center"
+          className="panel rounded-xl p-8 text-center"
         >
-          <p className="text-lg text-white/70">
+          <p className="text-ink text-lg">
             No projects found matching your filters.
           </p>
-          <p className="mt-2 text-sm text-white/50">
+          <p className="text-ink-soft mt-2 text-sm">
             Try removing some filters or adjusting your search.
           </p>
         </motion.div>

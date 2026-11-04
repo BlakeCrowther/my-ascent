@@ -125,7 +125,7 @@ export function ContactSection() {
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
             <motion.div
-              className="glass rounded-2xl p-12"
+              className="panel rounded-2xl p-12"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
@@ -164,7 +164,7 @@ export function ContactSection() {
                 <Button
                   onClick={() => setIsSubmitted(false)}
                   variant="outline"
-                  className="glass text-sub-text"
+                  className="panel text-sub-text"
                 >
                   Send Another Message
                 </Button>
@@ -195,7 +195,7 @@ export function ContactSection() {
             {/* Contact Form */}
             <div className="lg:col-span-2">
               <motion.div
-                className="glass rounded-2xl p-8"
+                className="panel rounded-2xl p-8"
                 variants={fadeInLeft}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
@@ -217,7 +217,7 @@ export function ContactSection() {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Your name"
-                      className={`glass placeholder:text-sub-text/60 ${
+                      className={`field placeholder:text-ink-soft/70 ${
                         errors.name
                           ? "border-destructive focus:ring-destructive"
                           : ""
@@ -237,7 +237,7 @@ export function ContactSection() {
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="your.email@example.com"
-                      className={`glass placeholder:text-sub-text/60 ${
+                      className={`field placeholder:text-ink-soft/70 ${
                         errors.email
                           ? "border-destructive focus:ring-destructive"
                           : ""
@@ -257,7 +257,7 @@ export function ContactSection() {
                       onChange={handleInputChange}
                       rows={6}
                       placeholder="Tell me about your project or just say hello..."
-                      className={`glass placeholder:text-sub-text/60 resize-none ${
+                      className={`field placeholder:text-ink-soft/70 resize-none ${
                         errors.message
                           ? "border-destructive focus:ring-destructive"
                           : ""
@@ -291,7 +291,7 @@ export function ContactSection() {
             {/* Map and Contact Info */}
             <div className="lg:col-span-3">
               <motion.div
-                className="glass relative h-full min-h-[500px] overflow-hidden rounded-2xl"
+                className="panel relative h-full min-h-[500px] overflow-hidden rounded-2xl"
                 variants={fadeInRight}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
@@ -311,7 +311,7 @@ export function ContactSection() {
 
                 {/* Contact Info Overlay */}
                 <div className="absolute right-6 bottom-6 left-6">
-                  <div className="glass rounded-xl p-6">
+                  <div className="panel rounded-xl p-6">
                     <div className="grid gap-6 md:grid-cols-2">
                       <div>
                         <h3 className="text-sub-text mb-2 text-sm font-semibold tracking-wider uppercase">

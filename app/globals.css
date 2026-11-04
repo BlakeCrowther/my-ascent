@@ -7,7 +7,15 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sub-text: var(--sub-text);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-instrument-sans);
+  --font-display: var(--font-geist-sans);
+  --color-petal: var(--petal);
+  --color-petal-edge: var(--petal-edge);
+  --color-petal-deep: var(--petal-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rose: var(--rose);
+  --color-wine: var(--wine);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -46,29 +54,39 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0 / 0.2);
-  --foreground: oklch(0.147 0.004 49.25);
+  /* Alpenglow palette: petal panels with plum ink, taken from the sunset
+     background and the El Cap favicon. */
+  --petal: #f9e5e2;
+  --petal-edge: #f0cfcb;
+  --petal-deep: #f1d0cd;
+  --field: #fff8f6;
+  --ink: #2b1e3a;
+  --ink-soft: #573f52;
+  --rose: #a0485a;
+  --wine: #7d3446;
 
-  /* Custom sub-text color */
-  --sub-text: oklch(14.7% 0.004 49.25);
+  --background: var(--petal);
+  --foreground: var(--ink);
 
-  /* Glassmorphism Variables */
-  --card: oklch(1 0 0 / 0.2);
-  --card-foreground: oklch(0.147 0.004 49.25);
-  --popover: oklch(1 0 0 / 0.2);
-  --popover-foreground: oklch(0.147 0.004 49.25);
-  --primary: oklch(0.216 0.006 56.043);
-  --primary-foreground: oklch(0.985 0.001 106.423);
-  --secondary: oklch(0.97 0.001 106.424 / 0.2);
-  --secondary-foreground: oklch(0.216 0.006 56.043);
-  --muted: oklch(0.97 0.001 106.424 / 0.2);
-  --muted-foreground: oklch(0.553 0.013 58.071);
-  --accent: oklch(0.97 0.001 106.424 / 0.2);
-  --accent-foreground: oklch(0.216 0.006 56.043);
+  /* Text inside panels */
+  --sub-text: var(--ink);
+
+  --card: var(--petal);
+  --card-foreground: var(--ink);
+  --popover: var(--petal);
+  --popover-foreground: var(--ink);
+  --primary: var(--wine);
+  --primary-foreground: #fff3f1;
+  --secondary: var(--petal-deep);
+  --secondary-foreground: var(--ink);
+  --muted: var(--petal-deep);
+  --muted-foreground: #73596a;
+  --accent: var(--petal-deep);
+  --accent-foreground: var(--ink);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(1 0 0 / 0.2);
-  --input: oklch(1 0 0 / 0.25);
-  --ring: oklch(0.709 0.01 56.259);
+  --border: var(--petal-edge);
+  --input: #e8c7c3;
+  --ring: var(--rose);
 
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -134,8 +152,17 @@
     overflow-x: hidden;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display), system-ui, sans-serif;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
     /* Prevent horizontal scroll and ensure proper viewport handling */
     overflow-x: hidden;
     min-height: 100dvh;
@@ -143,8 +170,14 @@
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-card/70 border-1 border-white/20 shadow-2xl shadow-black/20 backdrop-blur-2xl;
+  /* Solid petal panel that sits on the photo (replaces the old glass blur). */
+  .panel {
+    @apply bg-petal border-petal-edge text-ink border shadow-[0_24px_50px_rgba(43,30,58,0.26)];
+  }
+
+  /* Form field inside a panel: a lighter petal so it reads as an input. */
+  .field {
+    @apply border-input text-ink border bg-[var(--field)] shadow-none;
   }
 
   /* iOS Safari viewport fix utility */

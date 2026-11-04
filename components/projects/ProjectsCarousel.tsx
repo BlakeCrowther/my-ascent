@@ -126,7 +126,7 @@ export function ProjectsCarousel({
             <CarouselItem key={index}>
               <motion.div
                 variants={itemVariants}
-                className="glass rounded-xl p-6"
+                className="panel rounded-xl p-6"
               >
                 {/* Title - Full Width */}
                 <div className="mb-6 text-center">
@@ -162,7 +162,7 @@ export function ProjectsCarousel({
                               href={project.github}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-sub-text inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs transition-colors hover:bg-white/20"
+                              className="bg-petal-deep text-wine inline-flex items-center gap-2 rounded-full border border-transparent px-3 py-2 text-xs transition-colors hover:bg-petal-edge"
                             >
                               <Github className="h-3 w-3" />
                               GitHub
@@ -174,7 +174,7 @@ export function ProjectsCarousel({
                               href={project.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-sub-text inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs transition-colors hover:bg-white/20"
+                              className="bg-petal-deep text-wine inline-flex items-center gap-2 rounded-full border border-transparent px-3 py-2 text-xs transition-colors hover:bg-petal-edge"
                             >
                               <Globe className="h-3 w-3" />
                               Live Demo
@@ -194,7 +194,7 @@ export function ProjectsCarousel({
                         {[...project.skills].sort().map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
-                            className="text-sub-text rounded-full border border-white/20 bg-white/10 px-2 py-1 text-xs"
+                            className="bg-petal-deep text-wine rounded-full border border-transparent px-2 py-1 text-xs"
                           >
                             {skill}
                           </span>
@@ -211,7 +211,7 @@ export function ProjectsCarousel({
                         {[...project.tools].sort().map((tool, toolIndex) => (
                           <span
                             key={toolIndex}
-                            className="text-sub-text rounded-full border border-white/20 bg-white/10 px-2 py-1 text-xs"
+                            className="bg-petal-deep text-wine rounded-full border border-transparent px-2 py-1 text-xs"
                           >
                             {tool}
                           </span>
@@ -251,13 +251,13 @@ export function ProjectsCarousel({
                 <CarouselItem key={index} className="basis-auto pl-2">
                   <motion.div
                     variants={itemVariants}
-                    className="glass h-32 w-40 rounded-xl md:h-40 md:w-56"
+                    className="panel h-32 w-40 rounded-xl md:h-40 md:w-56"
                   >
                     <CarouselThumb
                       onClick={() => onThumbClick(index)}
                       selected={index === currentSelectedIndex}
                     >
-                      <div className="flex h-full w-full flex-col items-center justify-center gap-3 text-center text-white">
+                      <div className="text-ink flex h-full w-full flex-col items-center justify-center gap-3 text-center">
                         <div className="relative h-14 w-14 flex-shrink-0">
                           <Image
                             src={project.icon}

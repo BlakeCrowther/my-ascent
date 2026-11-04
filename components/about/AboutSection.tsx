@@ -106,11 +106,11 @@ export function AboutSection() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {/* Text Content */}
           <div>
-            <p className="text-lg font-medium text-white md:text-xl">
+            <p className="text-ink text-lg font-medium md:text-xl">
               Hey, I&apos;m Blake. AI lead and full-stack engineer in San
               Diego, rock climber everywhere else.
             </p>
-            <p className="text-sub-text mt-4 text-base">
+            <p className="text-ink-soft mt-4 text-base">
               I like building things that are useful, not just clever. As the
               AI lead at my company, I get to work on the whole picture: the
               models, the systems around them, and the product people actually
@@ -119,7 +119,7 @@ export function AboutSection() {
               Science and Engineering at UC San Diego, with a focus on machine
               learning and AI engineering.
             </p>
-            <p className="text-sub-text mt-4 text-base">
+            <p className="text-ink-soft mt-4 text-base">
               Off the keyboard, I climb, surf, and make room for the occasional
               whimsical side quest. This site started as a goal: one day, climb
               El Capitan. On October 26, 2026, we topped out. The climber

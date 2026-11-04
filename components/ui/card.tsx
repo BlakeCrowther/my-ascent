@@ -10,7 +10,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     data-slot="card"
-    className={cn("glass flex flex-col gap-6 rounded-xl p-6 py-6", className)}
+    className={cn("panel flex flex-col gap-6 rounded-xl p-6 py-6", className)}
     {...props}
   />
 ));

@@ -78,7 +78,7 @@ export function ProjectThumbnails({
             <CarouselItem key={index} className="basis-auto pl-2">
               <motion.div
                 variants={itemVariants}
-                className="glass h-32 w-40 rounded-xl md:h-40 md:w-56"
+                className="panel h-32 w-40 rounded-xl md:h-40 md:w-56"
               >
                 <CarouselThumb
                   onClick={() => onThumbClick(index)}
