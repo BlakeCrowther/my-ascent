@@ -18,7 +18,7 @@ const SITE_URL = "https://my-ascent.vercel.app";
 const NAME = "Blake Crowther";
 const TITLE = `${NAME} · My Ascent`;
 const DESCRIPTION =
-  "Blake Crowther: AI engineer and data scientist in San Diego building full-stack and AI systems. Follow the climb through my projects.";
+  "Hey, I'm Blake. AI lead and full-stack engineer in San Diego, rock climber everywhere else. Scroll to follow the climb.";
 
 // Structured data so search engines can tie this site to Blake as a person.
 const personJsonLd = {
@@ -27,7 +27,7 @@ const personJsonLd = {
   name: NAME,
   url: SITE_URL,
   image: `${SITE_URL}/images/og-preview.png`,
-  jobTitle: "AI Engineer and Data Scientist",
+  jobTitle: "AI Lead and Full-Stack Engineer",
   address: {
     "@type": "PostalAddress",
     addressLocality: "San Diego",
@@ -47,6 +47,7 @@ export const metadata: Metadata = {
   applicationName: "My Ascent",
   keywords: [
     NAME,
+    "AI lead",
     "AI engineer",
     "data scientist",
     "full-stack developer",
