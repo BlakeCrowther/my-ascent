@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useScroll } from "framer-motion";
-import { useLayoutEffect, useRef, useState } from "react";
+import { RefObject, useLayoutEffect, useRef, useState } from "react";
 
 import { climbingPath } from "./path";
 
@@ -33,20 +33,29 @@ const PATH_TRANSFORM_MATRIX =
  */
 const INVERT_SCROLL = false;
 
-const IMAGE_SRC = "/images/background.webp";
+/**
+ * Width / height of the background image (public/images/background.webp is
+ * 2560x1707, from a 5472x3648 original). The portrait crop is narrower, but it
+ * is only served to screens narrower than 3:4, where object-cover scales either
+ * file to the container's height, so this ratio gives the same result.
+ */
+const BACKGROUND_ASPECT = 5472 / 3648;
 
 // The base height of our viewBox, which we'll use for our scaling calculations.
 const BASE_VIEWBOX_HEIGHT = 350;
 
-// The Climber component is now much simpler and doesn't need props.
-export function Climber() {
+type ClimberProps = {
+  /**
+   * The fixed background container. The climber scales from this element's
+   * size, not from window.innerHeight, so it always matches the image exactly,
+   * including on mobile where the browser toolbar grows and shrinks.
+   */
+  containerRef: RefObject<HTMLDivElement | null>;
+};
+
+export function Climber({ containerRef }: ClimberProps) {
   const pathRef = useRef<SVGPathElement>(null);
-  const [scale, setScale] = useState(1);
-  // State to hold the natural dimensions of the background image.
-  const [imageSize, setImageSize] = useState<{
-    width: number;
-    height: number;
-  } | null>(null);
+  const [scale, setScale] = useState(0);
 
   const { scrollYProgress } = useScroll({
     // Determines the scroll range over which the animation occurs.
@@ -59,52 +68,31 @@ export function Climber() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // This effect runs once to get the natural dimensions of the background image.
-  // This is crucial for correctly mimicking the `object-cover` behavior.
+  // Scale the SVG so it tracks the `object-cover` background exactly. The
+  // container is sized in lvh, so it (and this scale) does not change when a
+  // mobile toolbar collapses; it only changes on real resizes or rotation.
   useLayoutEffect(() => {
-    const img = new Image();
-    img.src = IMAGE_SRC;
-    img.onload = () => {
-      setImageSize({ width: img.naturalWidth, height: img.naturalHeight });
-    };
-  }, []);
+    const container = containerRef.current;
+    if (!container) return;
 
-  // This effect calculates the scale factor, ensuring the SVG path scales
-  // perfectly in sync with the `object-cover` background image.
-  useLayoutEffect(() => {
-    function updateScale() {
-      if (!imageSize) return; // Don't run if we don't know the image size yet.
-
-      const vW = window.innerWidth;
-      const vH = window.innerHeight;
-      const { width: iW, height: iH } = imageSize;
-
-      // Calculate the scale factors for both width and height.
-      const scaleX = vW / iW;
-      const scaleY = vH / iH;
-
-      // The `object-cover` logic is to use the LARGER of the two scales.
-      // This ensures the image covers the entire container.
-      const coverScale = Math.max(scaleX, scaleY);
-
-      // The final rendered height of the background image.
-      const finalImageHeight = iH * coverScale;
-
-      // We want our SVG's final height to match the image's final height.
-      // So, we calculate the scale needed to get from our base height to the target height.
-      const newScale = finalImageHeight / BASE_VIEWBOX_HEIGHT;
-
-      setScale(newScale);
+    function updateScale(width: number, height: number) {
+      if (!width || !height) return;
+      // object-cover scales the image to the larger of the two fits, so the
+      // rendered image height is whichever is bigger: the container height,
+      // or the height the image needs to span the container's width.
+      const renderedImageHeight = Math.max(height, width / BACKGROUND_ASPECT);
+      setScale(renderedImageHeight / BASE_VIEWBOX_HEIGHT);
     }
 
-    window.addEventListener("resize", updateScale);
-    // updateScale depends on imageSize, so we call it here.
-    if (imageSize) {
-      updateScale();
-    }
+    const rect = container.getBoundingClientRect();
+    updateScale(rect.width, rect.height);
 
-    return () => window.removeEventListener("resize", updateScale);
-  }, [imageSize]); // Rerun this effect when the image size is known.
+    const observer = new ResizeObserver(([entry]) => {
+      updateScale(entry.contentRect.width, entry.contentRect.height);
+    });
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [containerRef]);
 
   // This effect is for setting the initial position and logging debug info.
   // It runs whenever the scale changes, ensuring we have the latest info.

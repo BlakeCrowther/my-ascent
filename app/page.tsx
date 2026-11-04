@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 import { AboutSection } from "@/components/about/AboutSection";
 import { Climber } from "@/components/climber/Climber";
 import { ContactSection } from "@/components/contact/ContactSection";
-import Image from "next/image";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
 import { WelcomeSection } from "@/components/welcome/WelcomeSection";
 import { useInView } from "framer-motion";
@@ -23,6 +22,7 @@ export default function Home() {
     }
   }, []);
 
+  const backgroundRef = useRef<HTMLDivElement>(null);
   const welcomeRef = useRef(null);
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
@@ -52,27 +52,31 @@ export default function Home() {
         This div is our new background. It's fixed, so it stays in place
         while the content below scrolls over it. The z-index keeps it in the back.
       */}
-      <div className="bg-container-fixed -z-10">
-        <Image
-          src="/images/background.webp"
-          alt="A panoramic view of Yosemite Valley at sunset, with El Capitan prominently on the left."
-          // The `fill` prop makes the image expand to fit its parent container.
-          fill
-          // `priority` tells Next.js to load this image first, as it's the
-          // largest and most important visual element on the page (LCP).
-          priority
-          // This is the key for our mobile-first strategy:
-          // - `object-cover`: Scales the image to cover the entire container.
-          // - `object-left`: Aligns the image to the left, keeping El Capitan in view.
-          className="object-cover object-top-left"
-          quality={100}
-          sizes="100vw"
-        />
+      <div ref={backgroundRef} className="bg-container-fixed -z-10">
+        {/*
+          Art direction: portrait screens (phones, tablets upright) get a
+          left-anchored 3:4 crop of the original at 2560px tall, so the image
+          stays sharp when it is scaled to the screen's height. Both files are
+          anchored top-left and shown with object-cover, so on any screen
+          narrower than 3:4 they render identically and the climber's path
+          (see BACKGROUND_ASPECT in Climber) lines up with either one.
+        */}
+        <picture>
+          <source
+            media="(max-aspect-ratio: 3/4)"
+            srcSet="/images/background-portrait.webp"
+          />
+          <img
+            src="/images/background.webp"
+            alt="A panoramic view of Yosemite Valley at sunset, with El Capitan prominently on the left."
+            className="h-full w-full object-cover object-top-left"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
       </div>
 
-      <div className="z-10">
-        <Climber />
-      </div>
+      <Climber containerRef={backgroundRef} />
 
       {/* This container provides the scrollable space. It's on top of the fixed background. */}
       <div className="relative z-20 text-white">

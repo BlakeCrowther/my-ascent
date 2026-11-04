@@ -152,43 +152,27 @@
     min-height: 100dvh;
   }
 
-  /* Background container that handles dynamic viewports */
+  /*
+   * Fixed background. Sized to the *large* viewport (lvh): the height with the
+   * mobile browser toolbar collapsed. Unlike dvh, lvh does not change while the
+   * toolbar animates in and out, so the image (and the climber, which measures
+   * this element) stays put while scrolling. With the toolbar expanded, the
+   * bottom edge simply sits behind it.
+   */
   .bg-container-fixed {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    height: 100dvh;
-    /* Ensure the container and its image always fill completely */
+    height: 100lvh;
     overflow: hidden;
   }
 
-  /* Ensure Next.js Image with fill prop covers entire container */
-  .bg-container-fixed > img,
-  .bg-container-fixed > div {
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    object-fit: cover !important;
-  }
-
-  /* iOS Safari specific background handling */
-  @supports (-webkit-touch-callout: none) {
-    .bg-container-fixed {
-      height: -webkit-fill-available;
-      /* Ensure minimum height coverage for dynamic viewport */
-      min-height: 100vh;
-      min-height: 100dvh;
-    }
-    
-    .bg-container-fixed > img,
-    .bg-container-fixed > div {
-      height: -webkit-fill-available !important;
-      min-height: -webkit-fill-available !important;
-    }
+  .bg-container-fixed picture {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 }
 
