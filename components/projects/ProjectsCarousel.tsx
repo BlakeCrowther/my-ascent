@@ -20,11 +20,11 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Project, projects } from "@/config/projects";
 
 const projectThumbnails = [
-  "/images/about/Joshua_Bouldering.jpeg",
-  "/images/about/Stoney_Point_Undergrad.jpeg",
-  "/images/about/Stoney_Point_Undergrad_2.jpeg",
-  "/images/about/Joshua_Bouldering.jpeg",
-  "/images/about/Stoney_Point_Undergrad.jpeg",
+  "/images/about/Joshua_Bouldering.webp",
+  "/images/about/Stoney_Point_Undergrad.webp",
+  "/images/about/Stoney_Point_Undergrad_2.webp",
+  "/images/about/Joshua_Bouldering.webp",
+  "/images/about/Stoney_Point_Undergrad.webp",
 ];
 
 export function ProjectsCarousel({

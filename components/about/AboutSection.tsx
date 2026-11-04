@@ -19,12 +19,12 @@ import { useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 const images = [
-  "/images/about/Joshua_Bouldering.jpeg",
-  "/images/about/LMU_bluff.jpeg",
-  "/images/about/Stoney_Point_Undergrad.jpeg",
-  "/images/about/viasat.jpeg",
-  "/images/about/Stoney_Point_Undergrad_2.jpeg",
-  "/images/about/ticketmaster_internship.jpeg",
+  "/images/about/Joshua_Bouldering.webp",
+  "/images/about/LMU_bluff.webp",
+  "/images/about/Stoney_Point_Undergrad.webp",
+  "/images/about/viasat.webp",
+  "/images/about/Stoney_Point_Undergrad_2.webp",
+  "/images/about/ticketmaster_internship.webp",
 ];
 
 export function AboutSection() {

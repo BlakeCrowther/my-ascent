@@ -54,7 +54,7 @@ export default function Home() {
       */}
       <div className="bg-container-fixed -z-10">
         <Image
-          src="/images/background.jpeg"
+          src="/images/background.webp"
           alt="A panoramic view of Yosemite Valley at sunset, with El Capitan prominently on the left."
           // The `fill` prop makes the image expand to fit its parent container.
           fill

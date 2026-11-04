@@ -33,7 +33,7 @@ const PATH_TRANSFORM_MATRIX =
  */
 const INVERT_SCROLL = false;
 
-const IMAGE_SRC = "/images/background.jpeg";
+const IMAGE_SRC = "/images/background.webp";
 
 // The base height of our viewBox, which we'll use for our scaling calculations.
 const BASE_VIEWBOX_HEIGHT = 350;
