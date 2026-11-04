@@ -13,7 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CardContent } from "@/components/ui/card";
 import { CarouselThumb } from "@/components/ui/CarouselThumb";
 import Image from "next/image";
-import { ClipboardList } from "lucide-react";
+import { ClipboardList, Github, ExternalLink, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import { ProjectMediaCarousel } from "./ProjectMediaCarousel";
 import useEmblaCarousel from "embla-carousel-react";
@@ -118,7 +118,7 @@ export function ProjectsCarousel({
       variants={containerVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="mx-auto w-full max-w-4xl"
+      className="mx-auto max-w-4xl"
     >
       <Carousel setApi={setApi} orientation="horizontal">
         <CarouselContent>
@@ -130,10 +130,10 @@ export function ProjectsCarousel({
               >
                 {/* Title - Full Width */}
                 <div className="mb-6 text-center">
-                  <h3 className="text-3xl font-bold text-white">
+                  <h3 className="text-sub-text text-3xl font-bold">
                     {project.title}
                   </h3>
-                  <p className="mt-2 text-lg text-white/70">
+                  <p className="text-sub-text mt-2 text-lg">
                     {project.subtitle}
                   </p>
                 </div>
@@ -143,23 +143,58 @@ export function ProjectsCarousel({
                   {/* Left Column - Description Only */}
                   <div className="flex-1">
                     <div
-                      className="text-base leading-relaxed whitespace-pre-line text-white/80"
+                      className="text-sub-text text-base leading-relaxed whitespace-pre-line"
                       dangerouslySetInnerHTML={{ __html: project.description }}
                     />
                   </div>
 
-                  {/* Right Column - Skills, Tools, Media */}
+                  {/* Right Column - Links, Skills, Tools, Media */}
                   <div className="flex-1 space-y-6">
+                    {/* Links */}
+                    {(project.github || project.link) && (
+                      <div>
+                        <h4 className="text-sub-text mb-2 text-sm font-semibold">
+                          Links
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-sub-text inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs transition-colors hover:bg-white/20"
+                            >
+                              <Github className="h-3 w-3" />
+                              GitHub
+                              <ExternalLink className="h-3 w-3" />
+                            </a>
+                          )}
+                          {project.link && (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-sub-text inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs transition-colors hover:bg-white/20"
+                            >
+                              <Globe className="h-3 w-3" />
+                              Live Demo
+                              <ExternalLink className="h-3 w-3" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Skills */}
                     <div>
-                      <h4 className="mb-2 text-sm font-semibold text-white/90">
+                      <h4 className="text-sub-text mb-2 text-sm font-semibold">
                         Skills
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {[...project.skills].sort().map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
-                            className="rounded-full border border-white/20 bg-white/10 px-2 py-1 text-xs text-white/80"
+                            className="text-sub-text rounded-full border border-white/20 bg-white/10 px-2 py-1 text-xs"
                           >
                             {skill}
                           </span>
@@ -169,14 +204,14 @@ export function ProjectsCarousel({
 
                     {/* Tools */}
                     <div>
-                      <h4 className="mb-2 text-sm font-semibold text-white/90">
+                      <h4 className="text-sub-text mb-2 text-sm font-semibold">
                         Tools
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {[...project.tools].sort().map((tool, toolIndex) => (
                           <span
                             key={toolIndex}
-                            className="rounded-full border border-white/20 bg-white/10 px-2 py-1 text-xs text-white/80"
+                            className="text-sub-text rounded-full border border-white/20 bg-white/10 px-2 py-1 text-xs"
                           >
                             {tool}
                           </span>

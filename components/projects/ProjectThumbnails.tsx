@@ -4,6 +4,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
@@ -28,6 +30,17 @@ export function ProjectThumbnails({
 }: ProjectThumbnailsProps) {
   const [thumbApi, setThumbApi] = useState<CarouselApi>();
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.4,
+      },
+    },
+  };
+
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -35,7 +48,6 @@ export function ProjectThumbnails({
       opacity: 1,
       transition: {
         duration: 0.5,
-        delay: 0.3,
       },
     },
   };
@@ -47,9 +59,9 @@ export function ProjectThumbnails({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.8, delay: 0.4 }}
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
       className="w-full max-w-4xl"
     >
       <Carousel
@@ -66,16 +78,14 @@ export function ProjectThumbnails({
             <CarouselItem key={index} className="basis-auto pl-2">
               <motion.div
                 variants={itemVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
                 className="glass h-32 w-40 rounded-xl md:h-40 md:w-56"
               >
                 <CarouselThumb
                   onClick={() => onThumbClick(index)}
                   selected={index === selectedIndex}
                 >
-                  <div className="flex h-full w-full flex-col items-center justify-center gap-3 text-center text-white">
-                    <div className="relative h-14 w-14 flex-shrink-0">
+                  <div className="text-sub-text flex h-full w-full flex-col items-center justify-center gap-2 p-2 text-center">
+                    <div className="relative h-10 w-10 flex-shrink-0 md:h-14 md:w-14">
                       <Image
                         src={project.icon}
                         alt={`${project.title} icon`}
@@ -83,7 +93,7 @@ export function ProjectThumbnails({
                         className="object-contain"
                       />
                     </div>
-                    <span className="text-sm leading-tight font-semibold">
+                    <span className="text-xs leading-tight font-semibold md:text-sm">
                       {project.title}
                     </span>
                   </div>
@@ -92,6 +102,8 @@ export function ProjectThumbnails({
             </CarouselItem>
           ))}
         </CarouselContent>
+        <CarouselPrevious variant="outline" className="text-foreground" />
+        <CarouselNext variant="outline" className="text-foreground" />
       </Carousel>
     </motion.div>
   );

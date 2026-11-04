@@ -10,7 +10,7 @@ const ROLES = [
   "AI/ML Explorer",
   "Full Stack Developer",
   "UI/UX Enthusiast",
-  "Rock Climbing Aficionado",
+  "Rock Climber",
   "Problem Solver",
   "Computer Scientist (B.S.)",
   "Lifelong Learner",
@@ -52,10 +52,12 @@ export function WelcomeSection() {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center text-center">
-      <h1 className="text-6xl font-bold">My Ascent as a</h1>
+    <div className="relative flex h-dvh w-full flex-col items-center justify-center text-center">
+      <h1 className="text-5xl font-bold sm:text-6xl lg:text-7xl">
+        My ascent as a
+      </h1>
       <p
-        className={`mt-2 text-xl font-medium tracking-wide drop-shadow-sm transition-opacity duration-500 sm:text-3xl ${
+        className={`mt-2 text-2xl font-medium tracking-wide drop-shadow-sm transition-opacity duration-500 sm:text-4xl ${
           isFading ? "opacity-0" : "opacity-100"
         }`}
       >
@@ -67,13 +69,9 @@ export function WelcomeSection() {
         href="#about"
         aria-label="Scroll to next section"
         onClick={handleChevronClick}
-        className={`group absolute bottom-0 left-0 flex h-[30%] w-full cursor-pointer items-end justify-center pb-8 transition-opacity duration-700 ${
+        className={`group absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer transition-opacity duration-700 ${
           hidden ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent, rgba(0,0,0,0.6))",
-        }}
       >
         <ChevronDown
           size={56}

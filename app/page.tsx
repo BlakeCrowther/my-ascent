@@ -28,10 +28,10 @@ export default function Home() {
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
 
-  const welcomeInView = useInView(welcomeRef, { amount: 0.5 });
-  const aboutInView = useInView(aboutRef, { amount: 0.5 });
-  const projectsInView = useInView(projectsRef, { amount: 0.5 });
-  const contactInView = useInView(contactRef, { amount: 0.5 });
+  const welcomeInView = useInView(welcomeRef, { amount: 0.3 });
+  const aboutInView = useInView(aboutRef, { amount: 0.2 });
+  const projectsInView = useInView(projectsRef, { amount: 0.2 });
+  const contactInView = useInView(contactRef, { amount: 0.2 });
 
   useEffect(() => {
     if (welcomeInView) {
@@ -52,7 +52,7 @@ export default function Home() {
         This div is our new background. It's fixed, so it stays in place
         while the content below scrolls over it. The z-index keeps it in the back.
       */}
-      <div className="fixed inset-0 -z-10">
+      <div className="bg-container-fixed -z-10">
         <Image
           src="/images/background.jpeg"
           alt="A panoramic view of Yosemite Valley at sunset, with El Capitan prominently on the left."
@@ -66,6 +66,7 @@ export default function Home() {
           // - `object-left`: Aligns the image to the left, keeping El Capitan in view.
           className="object-cover object-top-left"
           quality={100}
+          sizes="100vw"
         />
       </div>
 
@@ -77,7 +78,7 @@ export default function Home() {
       <div className="relative z-20 text-white">
         <section
           ref={welcomeRef}
-          className="flex h-screen items-center justify-center"
+          className="flex min-h-dvh items-center justify-center"
         >
           <WelcomeSection />
         </section>
@@ -85,7 +86,7 @@ export default function Home() {
         <section
           ref={aboutRef}
           id="about"
-          className="flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
+          className="flex min-h-dvh items-center justify-center px-4 py-12 pb-40 sm:px-6 sm:pb-12 lg:px-8"
         >
           <AboutSection />
         </section>
@@ -93,7 +94,7 @@ export default function Home() {
         <section
           ref={projectsRef}
           id="projects"
-          className="my-12 flex min-h-screen items-center justify-center px-4 py-12 text-white sm:px-6 md:my-72 lg:px-8"
+          className="my-12 flex min-h-dvh items-center justify-center px-4 py-12 pt-40 text-white sm:px-6 sm:pt-12 md:my-72 lg:px-8"
         >
           <ProjectsSection />
         </section>
@@ -101,7 +102,7 @@ export default function Home() {
         <section
           ref={contactRef}
           id="contact"
-          className="flex h-screen items-center justify-center px-4 text-white sm:px-6 lg:px-8"
+          className="flex min-h-dvh items-center justify-center px-4 text-white sm:px-6 lg:px-8"
         >
           <ContactSection />
         </section>

@@ -6,6 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-sub-text: var(--sub-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -48,6 +49,9 @@
   --background: oklch(1 0 0 / 0.2);
   --foreground: oklch(0.147 0.004 49.25);
 
+  /* Custom sub-text color */
+  --sub-text: oklch(14.7% 0.004 49.25);
+
   /* Glassmorphism Variables */
   --card: oklch(1 0 0 / 0.2);
   --card-foreground: oklch(0.147 0.004 49.25);
@@ -84,6 +88,10 @@
 .dark {
   --background: oklch(0.147 0.004 49.25);
   --foreground: oklch(0.985 0.001 106.423);
+  
+  /* Custom sub-text color for dark mode */
+  --sub-text: oklch(0.7 0.02 240);
+  
   --card: oklch(0.216 0.006 56.043);
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
@@ -119,17 +127,68 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
     scroll-behavior: smooth;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Prevent horizontal scroll and ensure proper viewport handling */
+    overflow-x: hidden;
+    min-height: 100dvh;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-card/70 border border-white/10 shadow-2xl shadow-black/20 backdrop-blur-xl;
+    @apply bg-card/70 border-1 border-white/20 shadow-2xl shadow-black/20 backdrop-blur-2xl;
+  }
+
+  /* iOS Safari viewport fix utility */
+  .ios-vh-fix {
+    min-height: 100dvh;
+  }
+
+  /* Background container that handles dynamic viewports */
+  .bg-container-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    /* Ensure the container and its image always fill completely */
+    overflow: hidden;
+  }
+
+  /* Ensure Next.js Image with fill prop covers entire container */
+  .bg-container-fixed > img,
+  .bg-container-fixed > div {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* iOS Safari specific background handling */
+  @supports (-webkit-touch-callout: none) {
+    .bg-container-fixed {
+      height: -webkit-fill-available;
+      /* Ensure minimum height coverage for dynamic viewport */
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+    
+    .bg-container-fixed > img,
+    .bg-container-fixed > div {
+      height: -webkit-fill-available !important;
+      min-height: -webkit-fill-available !important;
+    }
   }
 }
 
@@ -140,3 +199,16 @@ html {
 body {
   color: rgb(var(--foreground-rgb));
 }
+/* 
+::-webkit-scrollbar-track {
+  background: transparent;
+  display: none;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  display: block;
+} */

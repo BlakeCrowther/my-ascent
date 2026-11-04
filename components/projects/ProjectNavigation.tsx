@@ -31,7 +31,7 @@ export function ProjectNavigation({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.8, delay: 0.3 }}
+      transition={{ duration: 0.8, delay: 0.0 }}
       className="flex w-full max-w-4xl items-center justify-between"
     >
       {/* Arrow Buttons */}
@@ -41,7 +41,7 @@ export function ProjectNavigation({
           size="icon"
           onClick={onPrevious}
           disabled={!canScrollPrev}
-          className="h-8 w-8 rounded-full border-white/20 bg-white/10 text-white hover:bg-white/20 disabled:opacity-50"
+          className="glass text-foreground h-8 w-8 rounded-full disabled:opacity-50"
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
@@ -50,7 +50,7 @@ export function ProjectNavigation({
           size="icon"
           onClick={onNext}
           disabled={!canScrollNext}
-          className="h-8 w-8 rounded-full border-white/20 bg-white/10 text-white hover:bg-white/20 disabled:opacity-50"
+          className="glass text-foreground h-8 w-8 rounded-full disabled:opacity-50"
         >
           <ChevronRight className="h-4 w-4" />
         </Button>
@@ -66,8 +66,8 @@ export function ProjectNavigation({
             onClick={() => onDotClick(index)}
             className={`h-2 w-2 rounded-full p-0 transition-all ${
               index === selectedIndex
-                ? "bg-white"
-                : "bg-white/30 hover:bg-white/50"
+                ? "bg-black"
+                : "bg-black/30 hover:bg-black/50"
             }`}
           />
         ))}
