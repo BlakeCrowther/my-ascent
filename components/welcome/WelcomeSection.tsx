@@ -6,6 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { useScroll } from "framer-motion";
 
 const ROLES = [
+  "AI Lead",
   "Data Scientist (M.A.S.)",
   "AI/ML Explorer",
   "Full Stack Developer",

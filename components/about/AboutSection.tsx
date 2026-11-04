@@ -106,30 +106,24 @@ export function AboutSection() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {/* Text Content */}
           <div>
-            <p className="text-sub-text text-base">
-              I'm a passionate and driven developer who thrives on building
-              elegant, high-performance systems—from the frontend to the
-              infrastructure that powers it. My journey in tech began with a
-              curiosity about how things work, leading me to earn a B.S. in
-              Computer Science from Loyola Marymount University.
+            <p className="text-lg font-medium text-white md:text-xl">
+              Hey, I&apos;m Blake. AI lead and full-stack engineer in San
+              Diego, rock climber everywhere else.
             </p>
             <p className="text-sub-text mt-4 text-base">
-              That curiosity took me into full-stack development and systems
-              engineering, where I deepened my skills building across the stack.
-              Later, I earned a Master's in Data Science and Engineering at UC
-              San Diego, expanding my expertise into AI engineering, machine
-              learning, and large-scale data systems.
+              I like building things that are useful, not just clever. As the
+              AI lead at my company, I get to work on the whole picture: the
+              models, the systems around them, and the product people actually
+              use. I studied Computer Science at Loyola Marymount, spent years
+              working across the stack, then earned a Master&apos;s in Data
+              Science and Engineering at UC San Diego, with a focus on machine
+              learning and AI engineering.
             </p>
             <p className="text-sub-text mt-4 text-base">
-              Each role has shaped a different facet of my skillset, and
-              together they form the route I've taken—<em>my ascent</em>—through
-              the world of software.
-            </p>
-            <p className="text-sub-text mt-4 text-base">
-              When I'm not coding, I'm climbing. The focus, creativity, and
-              problem-solving required on the rock wall are the same qualities I
-              bring to my work. This portfolio is more than a showcase—it's a
-              visual journey through the peaks of my projects and passions.
+              Off the keyboard, I climb, surf, and make room for the occasional
+              whimsical side quest. This site started as a goal: one day, climb
+              El Capitan. On October 26, 2026, we topped out. The climber
+              you&apos;ll follow up the page is on our route, Triple Direct.
               Scroll to follow the climb.
             </p>
           </div>
