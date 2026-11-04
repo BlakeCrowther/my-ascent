@@ -182,7 +182,7 @@ export function ProjectMediaCarousel({
               <CarouselContent className="-ml-1">
                 {media.map((src, index) => (
                   <CarouselItem key={index} className="basis-auto pl-1">
-                    <div className="h-12 w-16">
+                    <div className="h-12 w-16 rounded-md">
                       <CarouselThumb
                         onClick={() => onThumbClick(index)}
                         selected={index === selectedIndex}

@@ -251,7 +251,7 @@ export function ProjectsCarousel({
                 <CarouselItem key={index} className="basis-auto pl-2">
                   <motion.div
                     variants={itemVariants}
-                    className="panel h-32 w-40 rounded-xl md:h-40 md:w-56"
+                    className="tile h-32 w-40 rounded-xl md:h-40 md:w-56"
                   >
                     <CarouselThumb
                       onClick={() => onThumbClick(index)}

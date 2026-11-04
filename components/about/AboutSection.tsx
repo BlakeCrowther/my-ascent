@@ -168,7 +168,7 @@ export function AboutSection() {
                 <CarouselContent>
                   {images.map((src, index) => (
                     <CarouselItem key={index} className="basis-auto">
-                      <div className="h-20 w-20">
+                      <div className="h-20 w-20 rounded-md">
                         <CarouselThumb
                           onClick={() => onThumbClick(index)}
                           selected={index === selectedIndex}

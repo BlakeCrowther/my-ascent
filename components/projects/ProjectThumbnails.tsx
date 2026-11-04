@@ -78,7 +78,7 @@ export function ProjectThumbnails({
             <CarouselItem key={index} className="basis-auto pl-2">
               <motion.div
                 variants={itemVariants}
-                className="panel h-32 w-40 rounded-xl md:h-40 md:w-56"
+                className="tile h-32 w-40 rounded-xl md:h-40 md:w-56"
               >
                 <CarouselThumb
                   onClick={() => onThumbClick(index)}
@@ -93,7 +93,7 @@ export function ProjectThumbnails({
                         className="object-contain"
                       />
                     </div>
-                    <span className="text-xs leading-tight font-semibold md:text-sm">
+                    <span className="line-clamp-3 text-xs leading-tight font-semibold md:text-sm">
                       {project.title}
                     </span>
                   </div>
