@@ -14,47 +14,72 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://my-ascent.vercel.app"),
-  title: {
-    default: "My Ascent - Portfolio",
-    template: "%s | My Ascent",
+const SITE_URL = "https://my-ascent.vercel.app";
+const NAME = "Blake Crowther";
+const TITLE = `${NAME} · My Ascent`;
+const DESCRIPTION =
+  "Blake Crowther: AI engineer and data scientist in San Diego building full-stack and AI systems. Follow the climb through my projects.";
+
+// Structured data so search engines can tie this site to Blake as a person.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: NAME,
+  url: SITE_URL,
+  image: `${SITE_URL}/images/og-preview.png`,
+  jobTitle: "AI Engineer and Data Scientist",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "San Diego",
+    addressRegion: "CA",
+    addressCountry: "US",
   },
-  description:
-    "My ascent through tech: full-stack development, data science, and AI engineering. Each project a new peak.",
+  sameAs: ["https://github.com/BlakeCrowther", "https://x.com/blakethenapper"],
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: `%s | ${NAME}`,
+  },
+  description: DESCRIPTION,
+  applicationName: "My Ascent",
   keywords: [
-    "software developer",
-    "full-stack",
-    "AI",
-    "data science",
+    NAME,
+    "AI engineer",
+    "data scientist",
+    "full-stack developer",
+    "software engineer",
+    "San Diego",
     "portfolio",
     "climbing",
-    "tech",
   ],
-  authors: [{ name: "Blake Crowther" }],
-  creator: "Blake Crowther",
+  authors: [{ name: NAME, url: SITE_URL }],
+  creator: NAME,
+  alternates: { canonical: "/" },
   openGraph: {
-    type: "website",
+    type: "profile",
+    firstName: "Blake",
+    lastName: "Crowther",
     locale: "en_US",
-    url: "https://my-ascent.vercel.app",
-    title: "My Ascent - Portfolio",
-    description:
-      "My ascent through tech: full-stack development, data science, and AI engineering. Each project a new peak.",
+    url: SITE_URL,
+    title: TITLE,
+    description: DESCRIPTION,
     siteName: "My Ascent",
     images: [
       {
         url: "/images/og-preview.png",
         width: 1200,
         height: 630,
-        alt: "My Ascent - Portfolio Preview",
+        alt: "Blake Crowther · My Ascent portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "My Ascent - Portfolio",
-    description:
-      "My ascent through tech: full-stack development, data science, and AI engineering. Each project a new peak.",
+    title: TITLE,
+    description: DESCRIPTION,
     images: ["/images/og-preview.png"],
     creator: "@blakethenapper",
   },
@@ -93,10 +118,10 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no"
         />
-        <title>My Ascent - Portfolio</title>
-        <meta property="og:title" content="My Ascent - Portfolio" />
-        <meta name="twitter:title" content="My Ascent - Portfolio" />
-        <meta name="application-name" content="My Ascent" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ios-vh-fix antialiased`}
