@@ -306,7 +306,7 @@ export function ContactSection() {
                   marginHeight={0}
                   marginWidth={0}
                   style={{ filter: "opacity(0.8)" }}
-                  src="https://www.google.com/maps/embed/v1/place?q=San+Diego,+CA+92107,+USA&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+                  src="https://www.google.com/maps/embed/v1/place?q=San+Diego,+CA+92107,+USA&key=AIzaSyBHgbE0vpZths1Wt0Zw-hTY4PC_qfiehXw"
                 />
 
                 {/* Contact Info Overlay */}
