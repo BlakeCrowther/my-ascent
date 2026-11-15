@@ -6,6 +6,7 @@ import { AboutSection } from "@/components/about/AboutSection";
 import { Climber } from "@/components/climber/Climber";
 import { ContactSection } from "@/components/contact/ContactSection";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
+import { TimelineSection } from "@/components/timeline/TimelineSection";
 import { WelcomeSection } from "@/components/welcome/WelcomeSection";
 import { useInView } from "framer-motion";
 
@@ -25,11 +26,13 @@ export default function Home() {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const welcomeRef = useRef(null);
   const aboutRef = useRef(null);
+  const climbRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
 
   const welcomeInView = useInView(welcomeRef, { amount: 0.3 });
   const aboutInView = useInView(aboutRef, { amount: 0.2 });
+  const climbInView = useInView(climbRef, { amount: 0.1 });
   const projectsInView = useInView(projectsRef, { amount: 0.2 });
   const contactInView = useInView(contactRef, { amount: 0.2 });
 
@@ -38,12 +41,14 @@ export default function Home() {
       history.replaceState(null, "", " ");
     } else if (aboutInView) {
       history.replaceState(null, "", "#about");
+    } else if (climbInView) {
+      history.replaceState(null, "", "#climb");
     } else if (projectsInView) {
       history.replaceState(null, "", "#projects");
     } else if (contactInView) {
       history.replaceState(null, "", "#contact");
     }
-  }, [welcomeInView, aboutInView, projectsInView, contactInView]);
+  }, [welcomeInView, aboutInView, climbInView, projectsInView, contactInView]);
 
   return (
     // We set a black background as a fallback.
@@ -93,6 +98,14 @@ export default function Home() {
           className="flex min-h-dvh items-center justify-center px-4 py-12 pb-40 sm:px-6 sm:pb-12 lg:px-8"
         >
           <AboutSection />
+        </section>
+
+        <section
+          ref={climbRef}
+          id="climb"
+          className="px-4 sm:px-6 lg:px-8"
+        >
+          <TimelineSection />
         </section>
 
         <section

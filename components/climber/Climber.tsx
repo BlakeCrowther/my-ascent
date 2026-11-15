@@ -4,6 +4,48 @@ import { motion, useMotionValue, useScroll } from "framer-motion";
 import { RefObject, useLayoutEffect, useRef, useState } from "react";
 
 import { climbingPath } from "./path";
+import { timeline } from "@/config/timeline";
+
+/** Elements with this attribute pin the climber to a spot on the route. */
+const ANCHOR_ATTR = "data-climb-t";
+
+type Keypoint = { scroll: number; t: number };
+
+/**
+ * Builds scroll -> route keypoints from every [data-climb-t] element: the
+ * climber reaches an element's `t` when that element is centred on screen.
+ * The page top is the base (t = 0); past the last anchor it stays put.
+ */
+function readKeypoints(): Keypoint[] {
+  const anchors = Array.from(
+    document.querySelectorAll<HTMLElement>(`[${ANCHOR_ATTR}]`),
+  );
+  const points: Keypoint[] = [{ scroll: 0, t: 0 }];
+  for (const el of anchors) {
+    const t = Number(el.getAttribute(ANCHOR_ATTR));
+    if (Number.isNaN(t)) continue;
+    const rect = el.getBoundingClientRect();
+    const centre = rect.top + window.scrollY + rect.height / 2;
+    const scroll = Math.max(0, centre - window.innerHeight / 2);
+    const last = points[points.length - 1];
+    // Keep keypoints strictly increasing in both scroll and t.
+    if (scroll > last.scroll && t >= last.t) points.push({ scroll, t });
+  }
+  return points;
+}
+
+function routeProgress(points: Keypoint[], scroll: number): number {
+  if (points.length < 2) return 0;
+  if (scroll <= points[0].scroll) return points[0].t;
+  for (let i = 1; i < points.length; i++) {
+    const a = points[i - 1];
+    const b = points[i];
+    if (scroll <= b.scroll) {
+      return a.t + ((scroll - a.scroll) / (b.scroll - a.scroll)) * (b.t - a.t);
+    }
+  }
+  return points[points.length - 1].t;
+}
 
 // =============================================================================
 // 🎯 Tuning Configuration
@@ -26,12 +68,6 @@ import { climbingPath } from "./path";
  */
 const PATH_TRANSFORM_MATRIX =
   "matrix(0.26458333,0,0,0.26458333,-81.665308,-41.091832)";
-
-/**
- * applyInvertedScroll: Set to `true` if the climber moves down when you
- * scroll down. Setting this to true will reverse the animation direction.
- */
-const INVERT_SCROLL = false;
 
 /**
  * Width / height of the background image (public/images/background.webp is
@@ -57,12 +93,13 @@ export function Climber({ containerRef }: ClimberProps) {
   const pathRef = useRef<SVGPathElement>(null);
   const [scale, setScale] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    // Determines the scroll range over which the animation occurs.
-    // "start start" means animation begins when the top of the page hits the top of the viewport.
-    // "end end" means animation ends when the bottom of the page hits the bottom of the viewport.
-    offset: ["start start", "end end"],
-  });
+  const { scrollY } = useScroll();
+  const keypoints = useRef<Keypoint[]>([]);
+  // How many milestones the climber has reached; only changes at belays.
+  const [reached, setReached] = useState(0);
+  const [belays, setBelays] = useState<{ x: number; y: number; t: number }[]>(
+    [],
+  );
 
   // Motion values to hold the climber's x and y coordinates.
   const x = useMotionValue(0);
@@ -123,22 +160,53 @@ export function Climber({ containerRef }: ClimberProps) {
     y.set(startPoint.y);
   }, [scale, x, y]); // Rerun when scale changes.
 
-  // This effect ONLY handles scroll animation.
+  // Belay dots: one per timeline milestone, at its landmark on the route.
+  useLayoutEffect(() => {
+    const path = pathRef.current;
+    if (!path || !scale) return;
+    const length = path.getTotalLength();
+    setBelays(
+      timeline.map(({ landmark }) => {
+        const p = path.getPointAtLength(landmark.t * length);
+        return { x: p.x, y: p.y, t: landmark.t };
+      }),
+    );
+  }, [scale]);
+
+  // Scroll animation: map page scroll to route progress through the anchors.
   useLayoutEffect(() => {
     const path = pathRef.current;
     if (!path || !scale) return;
 
     const pathLength = path.getTotalLength();
 
-    const unsubscribe = scrollYProgress.onChange((progress) => {
-      const currentProgress = INVERT_SCROLL ? 1 - progress : progress;
-      const point = path.getPointAtLength(currentProgress * pathLength);
+    function update(scroll: number) {
+      const t = routeProgress(keypoints.current, scroll);
+      const point = path!.getPointAtLength(t * pathLength);
       x.set(point.x);
       y.set(point.y);
-    });
+      setReached(
+        timeline.filter(({ landmark }) => landmark.t <= t + 0.001).length,
+      );
+    }
 
-    return () => unsubscribe();
-  }, [scrollYProgress, scale, x, y]);
+    function remeasure() {
+      keypoints.current = readKeypoints();
+      update(window.scrollY);
+    }
+
+    remeasure();
+    // Anchors move as images load and sections animate in, so re-measure
+    // whenever the page height changes.
+    const observer = new ResizeObserver(remeasure);
+    observer.observe(document.body);
+    const unsubscribe = scrollY.on("change", update);
+
+    return () => {
+      observer.disconnect();
+      unsubscribe();
+    };
+  }, [scrollY, scale, x, y]);
 
   return (
     <svg
@@ -177,6 +245,21 @@ export function Climber({ containerRef }: ClimberProps) {
           // The transform is now on the parent <g> element
           // transform={PATH_TRANSFORM_MATRIX}
         />
+        {belays.map((b, i) => {
+          const isReached = i < reached;
+          return (
+            <circle
+              key={i}
+              cx={b.x}
+              cy={b.y}
+              r={isReached ? 7 : 5.5}
+              fill={isReached ? "#f9e5e2" : "rgba(43, 30, 58, 0.55)"}
+              stroke="rgba(255, 255, 255, 0.9)"
+              strokeWidth={2.5}
+              style={{ transition: "all 300ms ease" }}
+            />
+          );
+        })}
         {/*
           We wrap the climber in a <g> element to solve the transform issue.
           The outer <g> handles the dynamic x/y positioning along the path.
