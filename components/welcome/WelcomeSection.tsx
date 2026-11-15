@@ -46,7 +46,7 @@ export function WelcomeSection() {
   // Fade chevron and scroll to #about on click
   const handleChevronClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    const about = document.getElementById("about");
+    const about = document.getElementById("climb");
     if (about) {
       about.scrollIntoView({ behavior: "smooth" });
     }
@@ -67,11 +67,11 @@ export function WelcomeSection() {
 
       {/* Scroll Down Arrow */}
       <a
-        href="#about"
+        href="#climb"
         aria-label="Scroll to next section"
         onClick={handleChevronClick}
         className={`group absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer transition-opacity duration-700 ${
-          hidden ? "pointer-events-none opacity-0" : "opacity-100"
+          hidden ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"
         }`}
       >
         <ChevronDown

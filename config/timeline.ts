@@ -1,10 +1,16 @@
 /**
  * The climb, oldest to newest. Each entry is pinned to a landmark on Triple
  * Direct; the climber reaches that landmark when the entry's card is centred
- * on screen (see Climber.tsx). Add entries in date order and keep `t` rising.
+ * on screen (see Climber.tsx). Keep entries in date order and `t` rising.
+ * Projects are referenced by slug from config/projects.ts.
  */
 
-export type MilestoneKind = "education" | "work" | "project" | "summit";
+export type MilestoneKind =
+  | "intro"
+  | "education"
+  | "work"
+  | "project"
+  | "summit";
 
 export type Landmark = {
   name: string;
@@ -17,17 +23,18 @@ export type Landmark = {
  * along tripleDirectPath; nudge them to line up with the photo.
  */
 export const LANDMARKS = {
-  base: { name: "The Base", t: 0.02 },
-  freeblast: { name: "Freeblast", t: 0.1 },
-  halfDollar: { name: "Half Dollar", t: 0.2 },
-  mammoth: { name: "Mammoth Terraces", t: 0.28 },
-  muirWall: { name: "Muir Wall", t: 0.38 },
-  muirUpper: { name: "Upper Muir", t: 0.48 },
-  grayLedges: { name: "Gray Ledges", t: 0.56 },
-  campV: { name: "Camp V", t: 0.64 },
-  greatRoof: { name: "The Great Roof", t: 0.72 },
-  pancakeFlake: { name: "Pancake Flake", t: 0.79 },
-  changingCorners: { name: "Changing Corners", t: 0.9 },
+  camp: { name: "Base camp", t: 0 },
+  base: { name: "The Base", t: 0.04 },
+  freeblast: { name: "Freeblast", t: 0.11 },
+  halfDollar: { name: "Half Dollar", t: 0.18 },
+  mammoth: { name: "Mammoth Terraces", t: 0.26 },
+  muirWall: { name: "Muir Wall", t: 0.34 },
+  muirUpper: { name: "Upper Muir", t: 0.42 },
+  grayLedges: { name: "Gray Ledges", t: 0.5 },
+  campV: { name: "Camp V", t: 0.58 },
+  greatRoof: { name: "The Great Roof", t: 0.66 },
+  pancakeFlake: { name: "Pancake Flake", t: 0.74 },
+  changingCorners: { name: "Changing Corners", t: 0.86 },
   summit: { name: "The Summit", t: 1 },
 } satisfies Record<string, Landmark>;
 
@@ -36,14 +43,14 @@ export type Milestone = {
   kind: MilestoneKind;
   title: string;
   org?: string;
-  dates: string;
+  dates?: string;
   landmark: Landmark;
   summary: string;
   highlights?: string[];
   tags?: string[];
-  /** Title of a matching entry in config/projects.ts, for a "see project" link. */
-  project?: string;
-  /** Photo from this spot on the real climb. */
+  /** Slugs from config/projects.ts shown in this milestone's project panel. */
+  projects?: string[];
+  /** Photo from the real climb at this spot. */
   climbPhoto?: string;
   /** Photo from this point in life. */
   lifePhoto?: string;
@@ -51,14 +58,24 @@ export type Milestone = {
 
 export const timeline: Milestone[] = [
   {
-    id: "lmu",
+    id: "basecamp",
+    kind: "intro",
+    title: "Hey, I'm Blake",
+    landmark: LANDMARKS.camp,
+    summary:
+      "AI lead and full-stack engineer in San Diego, rock climber everywhere else. I like building things that are useful, not just clever. This site started as a goal: one day, climb El Capitan. Scroll to follow the route, or tap a dot on the wall.",
+    lifePhoto: "/images/about/Joshua_Bouldering.webp",
+  },
+  {
+    id: "lmu-start",
     kind: "education",
-    title: "B.S. Computer Science",
-    org: "Loyola Marymount University",
-    dates: "2016 – 2020",
+    title: "Started at Loyola Marymount",
+    org: "B.S. Computer Science",
+    dates: "2016",
     landmark: LANDMARKS.base,
     summary:
-      "Computer Science with a Business Administration minor. Algorithms, AI, databases, operating systems, and most weekends at Stoney Point.",
+      "Computer Science with a Business Administration minor. Algorithms, AI, databases, and operating systems, plus weekends at Stoney Point.",
+    // TODO: swap in the glasses + suit jacket photo.
     lifePhoto: "/images/about/LMU_bluff.webp",
   },
   {
@@ -74,35 +91,45 @@ export const timeline: Milestone[] = [
     lifePhoto: "/images/about/ticketmaster_internship.webp",
   },
   {
+    id: "lmu-grad",
+    kind: "education",
+    title: "Graduated from Loyola Marymount",
+    org: "B.S. Computer Science",
+    dates: "2020",
+    landmark: LANDMARKS.halfDollar,
+    summary: "Cap and gown, Business Administration minor, and a job to find.",
+    // TODO: cap and gown photo by the rock.
+  },
+  {
     id: "headsup",
     kind: "work",
-    title: "Lead Full-Stack Engineer",
+    title: "Full-Stack Software Engineer",
     org: "HeadsUp Lab, LMU",
     dates: "2019 – 2021",
-    landmark: LANDMARKS.halfDollar,
+    landmark: LANDMARKS.mammoth,
     summary:
-      "Led development of CampusGANDR, an NIH R01-funded React Native research app that gamifies social-norms feedback for college students. Shipped on iOS and Android, plus a React admin dashboard.",
+      "Built CampusGANDR, an NIH R01-funded React Native research app that gamifies social-norms feedback for college students, plus a React admin dashboard. Shipped on iOS and Android.",
     tags: ["React Native", "TypeScript", "Firebase"],
-    project: "CampusGANDR",
+    projects: ["campusgandr"],
   },
   {
     id: "jumble",
     kind: "project",
     title: "Jumble",
-    dates: "2021",
-    landmark: LANDMARKS.mammoth,
+    dates: "2020 – 2021",
+    landmark: LANDMARKS.muirWall,
     summary:
       "A music discovery app for DJs: harmonic-mixing recommendations from Spotify audio features.",
     tags: ["Next.js", "Spotify API"],
-    project: "Jumble",
+    projects: ["jumble"],
   },
   {
     id: "directv",
     kind: "work",
-    title: "Software Engineer",
+    title: "Systems Engineer",
     org: "DIRECTV",
     dates: "2022 – 2023",
-    landmark: LANDMARKS.muirWall,
+    landmark: LANDMARKS.muirUpper,
     summary:
       "Engineering owner turning product requirements into technical designs, and system integration engineer on an internal stream validation tool for production video streams.",
     highlights: [
@@ -112,16 +139,21 @@ export const timeline: Milestone[] = [
     tags: ["Systems Integration", "Observability"],
   },
   {
-    id: "ucsd",
+    id: "ucsd-start",
     kind: "education",
-    title: "M.A.S. Data Science & Engineering",
+    title: "Started the M.A.S. in Data Science and Engineering",
     org: "UC San Diego",
-    dates: "2023 – 2025",
-    landmark: LANDMARKS.muirUpper,
+    dates: "2023",
+    landmark: LANDMARKS.grayLedges,
     summary:
-      "Machine learning, scalable data analysis, data integration and ETL. Projects in distributed recommenders, audio deep learning, and music-and-mental-health research.",
-    tags: ["ML", "Spark", "PyTorch"],
-    project: "Scalable Music Recommender",
+      "Machine learning, scalable data analysis, data integration and ETL. These are the projects from that stretch.",
+    projects: [
+      "wildfire-kg",
+      "music-recommender",
+      "genre-classifier",
+      "music-mental-health",
+      "bizscape",
+    ],
   },
   {
     id: "viasat-intern",
@@ -129,7 +161,7 @@ export const timeline: Milestone[] = [
     title: "Graduate Data Scientist Intern",
     org: "Viasat",
     dates: "Summer 2024",
-    landmark: LANDMARKS.grayLedges,
+    landmark: LANDMARKS.campV,
     summary:
       "Algorithms to optimize satellite capacity allocation across a large search space, built on network demand profiles from usage and satellite data.",
     highlights: ["Cut model training time 40% with Bayesian tuning on SageMaker"],
@@ -137,46 +169,34 @@ export const timeline: Milestone[] = [
     lifePhoto: "/images/about/viasat.webp",
   },
   {
-    id: "bizscape",
-    kind: "project",
-    title: "Bizscape",
-    dates: "2024",
-    landmark: LANDMARKS.campV,
-    summary:
-      "A business knowledge graph in Neo4j with natural-language querying and map visualizations.",
-    tags: ["Neo4j", "LLMs", "Geospatial"],
-    project: "Bizscape",
-  },
-  {
     id: "viasat-ds",
     kind: "work",
     title: "Data Scientist",
     org: "Viasat",
+    // TODO: confirm end date.
     dates: "2025",
     landmark: LANDMARKS.greatRoof,
     summary:
       "Rebuilt the satellite capacity planning dashboard with 3D multi-layer geospatial views, cutting load times by over 75%.",
     tags: ["React", "Deck.gl", "TypeScript"],
-    project: "Satellite Capacity Allocation Visualization",
+    projects: ["satellite-viz"],
   },
   {
-    id: "capstone",
-    kind: "project",
-    title: "Wildfire Knowledge Graph",
-    org: "UCSD Capstone",
+    id: "ucsd-grad",
+    kind: "education",
+    title: "Earned the M.A.S. in Data Science and Engineering",
+    org: "UC San Diego",
     dates: "2025",
     landmark: LANDMARKS.pancakeFlake,
-    summary:
-      "A “ChatGPT for land managers”: a LangGraph agent over a GraphDB knowledge graph of LiDAR, sensor, and weather data, deployed on Kubernetes.",
-    tags: ["LangGraph", "Knowledge Graphs", "Kubernetes"],
-    project:
-      "Generating Narrative on the Immersive Forest with Knowledge Graphs and Conversational AI",
+    summary: "Capstone done, degree in hand.",
   },
   {
-    id: "ai-lead",
+    id: "space-heater",
     kind: "work",
+    // TODO: confirm title and start date.
     title: "AI Lead",
-    dates: "Now",
+    org: "Space Heater",
+    dates: "2025 – Now",
     landmark: LANDMARKS.changingCorners,
     summary:
       "Leading AI across the whole picture: the models, the systems around them, and the product people actually use.",
@@ -189,6 +209,6 @@ export const timeline: Milestone[] = [
     dates: "October 26, 2026",
     landmark: LANDMARKS.summit,
     summary:
-      "The goal this site started with. Next objective: whatever is worth climbing.",
+      "The goal this site started with, climbed via Triple Direct. Next objective: whatever is worth climbing.",
   },
 ];

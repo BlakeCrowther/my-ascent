@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-import { AboutSection } from "@/components/about/AboutSection";
 import { Climber } from "@/components/climber/Climber";
 import { ContactSection } from "@/components/contact/ContactSection";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
@@ -25,13 +24,11 @@ export default function Home() {
 
   const backgroundRef = useRef<HTMLDivElement>(null);
   const welcomeRef = useRef(null);
-  const aboutRef = useRef(null);
   const climbRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
 
   const welcomeInView = useInView(welcomeRef, { amount: 0.3 });
-  const aboutInView = useInView(aboutRef, { amount: 0.2 });
   const climbInView = useInView(climbRef, { amount: 0.1 });
   const projectsInView = useInView(projectsRef, { amount: 0.2 });
   const contactInView = useInView(contactRef, { amount: 0.2 });
@@ -39,8 +36,6 @@ export default function Home() {
   useEffect(() => {
     if (welcomeInView) {
       history.replaceState(null, "", " ");
-    } else if (aboutInView) {
-      history.replaceState(null, "", "#about");
     } else if (climbInView) {
       history.replaceState(null, "", "#climb");
     } else if (projectsInView) {
@@ -48,7 +43,7 @@ export default function Home() {
     } else if (contactInView) {
       history.replaceState(null, "", "#contact");
     }
-  }, [welcomeInView, aboutInView, climbInView, projectsInView, contactInView]);
+  }, [welcomeInView, climbInView, projectsInView, contactInView]);
 
   return (
     // We set a black background as a fallback.
@@ -84,20 +79,13 @@ export default function Home() {
       <Climber containerRef={backgroundRef} />
 
       {/* This container provides the scrollable space. It's on top of the fixed background. */}
-      <div className="relative z-20 text-white">
+      {/* Clicks pass through to the route; interactive sections opt back in. */}
+      <div className="pointer-events-none relative z-20 text-white">
         <section
           ref={welcomeRef}
           className="flex min-h-dvh items-center justify-center"
         >
           <WelcomeSection />
-        </section>
-
-        <section
-          ref={aboutRef}
-          id="about"
-          className="flex min-h-dvh items-center justify-center px-4 py-12 pb-40 sm:px-6 sm:pb-12 lg:px-8"
-        >
-          <AboutSection />
         </section>
 
         <section
@@ -111,7 +99,7 @@ export default function Home() {
         <section
           ref={projectsRef}
           id="projects"
-          className="my-12 flex min-h-dvh items-center justify-center px-4 py-12 pt-40 text-white sm:px-6 sm:pt-12 md:my-72 lg:px-8"
+          className="pointer-events-auto my-12 flex min-h-dvh items-center justify-center px-4 py-12 pt-40 text-white sm:px-6 sm:pt-12 md:my-72 lg:px-8"
         >
           <ProjectsSection />
         </section>
@@ -119,7 +107,7 @@ export default function Home() {
         <section
           ref={contactRef}
           id="contact"
-          className="flex min-h-dvh items-center justify-center px-4 text-white sm:px-6 lg:px-8"
+          className="pointer-events-auto flex min-h-dvh items-center justify-center px-4 text-white sm:px-6 lg:px-8"
         >
           <ContactSection />
         </section>

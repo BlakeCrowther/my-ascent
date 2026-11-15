@@ -1,4 +1,6 @@
 export type Project = {
+  /** Stable id used by config/timeline.ts and search. */
+  slug: string;
   title: string;
   subtitle: string;
   description: string;
@@ -12,6 +14,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "wildfire-kg",
     title:
       "Generating Narrative on the Immersive Forest with Knowledge Graphs and Conversational AI",
     subtitle:
@@ -57,6 +60,7 @@ export const projects: Project[] = [
     link: "https://wildfire.nrp-nautilus.io/",
   },
   {
+    slug: "satellite-viz",
     title: "Satellite Capacity Allocation Visualization",
     subtitle:
       "A high-performance visualization system for satellite network capacity allocation using React, Next.js, and Deck.gl.",
@@ -82,6 +86,7 @@ export const projects: Project[] = [
     link: "https://satellite-capacity-allocation.vercel.app/",
   },
   {
+    slug: "bizscape",
     title: "Bizscape",
     subtitle:
       "AI-powered business intelligence platform with interactive geospatial analysis and natural language querying of Neo4j knowledge graphs.",
@@ -119,6 +124,7 @@ export const projects: Project[] = [
     link: "https://bizscape.vercel.app/",
   },
   {
+    slug: "music-recommender",
     title: "Scalable Music Recommender",
     subtitle:
       "A distributed music recommendation system built with Apache Spark and ALS collaborative filtering, processing 1.4+ GB of user-song interactions from the Yahoo! Music dataset.",
@@ -150,6 +156,7 @@ export const projects: Project[] = [
     github: "https://github.com/BlakeCrowther/scalable-music-recommender",
   },
   {
+    slug: "music-mental-health",
     title: "Music, Mental Health, and Emotion",
     subtitle:
       "Data science research investigating correlations between music preferences, emotional content, and mental health indicators using Spotify data and survey analysis.",
@@ -182,6 +189,7 @@ export const projects: Project[] = [
     github: "https://github.com/BlakeCrowther/music-mental-health-and-emotion",
   },
   {
+    slug: "genre-classifier",
     title: "Music Genre Classification",
     subtitle:
       "Machine learning system using audio feature extraction and neural networks to automatically classify music genres from the Free Music Archive dataset with 106,000+ tracks.",
@@ -213,6 +221,7 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "jumble",
     title: "Jumble",
     subtitle:
       "A music discovery web application that helps DJs and producers find harmonically compatible tracks for seamless mixing using Spotify's audio analysis data.",
@@ -248,6 +257,7 @@ export const projects: Project[] = [
     link: "https://jumble-it.com/",
   },
   {
+    slug: "campusgandr",
     title: "CampusGANDR",
     subtitle:
       "A gamified mobile research platform for studying college student social norms and drinking behaviors through weekly prediction contests.",

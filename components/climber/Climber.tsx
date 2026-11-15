@@ -97,9 +97,9 @@ export function Climber({ containerRef }: ClimberProps) {
   const keypoints = useRef<Keypoint[]>([]);
   // How many milestones the climber has reached; only changes at belays.
   const [reached, setReached] = useState(0);
-  const [belays, setBelays] = useState<{ x: number; y: number; t: number }[]>(
-    [],
-  );
+  const [belays, setBelays] = useState<
+    { x: number; y: number; t: number; id: string; label: string }[]
+  >([]);
 
   // Motion values to hold the climber's x and y coordinates.
   const x = useMotionValue(0);
@@ -166,9 +166,15 @@ export function Climber({ containerRef }: ClimberProps) {
     if (!path || !scale) return;
     const length = path.getTotalLength();
     setBelays(
-      timeline.map(({ landmark }) => {
+      timeline.map(({ landmark, id, title, dates }) => {
         const p = path.getPointAtLength(landmark.t * length);
-        return { x: p.x, y: p.y, t: landmark.t };
+        return {
+          x: p.x,
+          y: p.y,
+          t: landmark.t,
+          id,
+          label: dates ? `${title} (${dates})` : title,
+        };
       }),
     );
   }, [scale]);
@@ -247,17 +253,38 @@ export function Climber({ containerRef }: ClimberProps) {
         />
         {belays.map((b, i) => {
           const isReached = i < reached;
+          const goTo = () =>
+            document
+              .getElementById(`climb-${b.id}`)
+              ?.scrollIntoView({ behavior: "smooth", block: "center" });
           return (
-            <circle
-              key={i}
-              cx={b.x}
-              cy={b.y}
-              r={isReached ? 7 : 5.5}
-              fill={isReached ? "#f9e5e2" : "rgba(43, 30, 58, 0.55)"}
-              stroke="rgba(255, 255, 255, 0.9)"
-              strokeWidth={2.5}
-              style={{ transition: "all 300ms ease" }}
-            />
+            <g
+              key={b.id}
+              role="button"
+              tabIndex={0}
+              aria-label={`Go to ${b.label}`}
+              onClick={goTo}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  goTo();
+                }
+              }}
+              style={{ pointerEvents: "all", cursor: "pointer", outline: "none" }}
+            >
+              <title>{b.label}</title>
+              {/* Oversized invisible target so dots are easy to hit on touch. */}
+              <circle cx={b.x} cy={b.y} r={14} fill="transparent" />
+              <circle
+                cx={b.x}
+                cy={b.y}
+                r={isReached ? 7 : 5.5}
+                fill={isReached ? "#f9e5e2" : "rgba(43, 30, 58, 0.55)"}
+                stroke="rgba(255, 255, 255, 0.9)"
+                strokeWidth={2.5}
+                style={{ transition: "all 300ms ease" }}
+              />
+            </g>
           );
         })}
         {/*
