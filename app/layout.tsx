@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { Geist, Geist_Mono, Instrument_Sans } from "next/font/google";
+import { Caveat, Geist, Geist_Mono, Instrument_Sans } from "next/font/google";
 
 import type { Metadata } from "next";
 
@@ -12,6 +12,13 @@ const geistSans = Geist({
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
   subsets: ["latin"],
+});
+
+/** Handwriting for polaroid and film captions. */
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: "500",
 });
 
 const geistMono = Geist_Mono({
@@ -130,7 +137,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSans.variable} ios-vh-fix antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSans.variable} ${caveat.variable} ios-vh-fix antialiased`}
       >
         {children}
       </body>

@@ -50,8 +50,6 @@ export type Milestone = {
   tags?: string[];
   /** Slugs from config/projects.ts shown in this milestone's project panel. */
   projects?: string[];
-  /** Photo from the real climb at this spot. */
-  climbPhoto?: string;
   /** Photo from this point in life. */
   lifePhoto?: string;
 };
