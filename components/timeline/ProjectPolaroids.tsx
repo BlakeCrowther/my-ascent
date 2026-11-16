@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/dialog";
 import { Project, projects } from "@/config/projects";
 import { motion } from "framer-motion";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useCloseOnScroll } from "@/components/timeline/useCloseOnScroll";
+import { openPhotoViewer } from "@/components/timeline/photoViewer";
 
 import Image from "next/image";
 
@@ -87,7 +88,7 @@ export function ProjectPolaroids({
 
   return (
     <div className="pointer-events-auto">
-      <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pt-5 pb-3 [scrollbar-width:none] sm:flex-wrap sm:justify-center sm:gap-5 sm:overflow-visible md:mx-0 md:grid md:grid-cols-2 md:gap-x-[2vw] md:gap-y-8 md:px-0 md:[&>*]:w-full md:[&>*:nth-child(even)]:translate-y-16">
+      <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pt-5 pb-3 [scrollbar-width:none] sm:flex-wrap sm:justify-center sm:gap-5 sm:overflow-visible md:mx-0 md:grid md:px-0 md:[&>*]:w-full md:grid-cols-4 md:gap-x-[1.5vw] md:gap-y-6 md:[&>*:nth-child(even)]:translate-y-6">
         {items.map((project, i) => (
           <Polaroid
             key={project.slug}
@@ -112,6 +113,144 @@ export function ProjectPolaroids({
   );
 }
 
+/**
+ * A project's screenshots: one large, thumbnails to pick another. Tapping the
+ * large one opens every screenshot in the full-screen viewer.
+ */
+function Gallery({
+  media,
+  title,
+  shot,
+  onShot,
+  onView,
+}: {
+  media: string[];
+  title: string;
+  shot: number;
+  onShot: (i: number) => void;
+  onView: (i: number) => void;
+}) {
+  const current = Math.min(shot, media.length - 1);
+  return (
+    // Stop presses here from starting the swipe between projects.
+    <div
+      className="flex flex-col gap-2 md:row-span-5 md:mt-2"
+      onPointerDown={(e) => e.stopPropagation()}
+    >
+      <button
+        type="button"
+        onClick={() => onView(current)}
+        aria-label={`View ${title} screenshots full screen`}
+        className="relative block aspect-video cursor-zoom-in overflow-hidden rounded-lg bg-white shadow-md"
+      >
+        <Image
+          src={media[current]}
+          alt={`${title} screenshot ${current + 1}`}
+          fill
+          sizes="(min-width: 768px) 640px, 100vw"
+          className="object-cover"
+        />
+        {media.length > 1 && (
+          <span className="bg-ink/75 absolute right-2 bottom-2 rounded-full px-2 py-0.5 text-xs font-medium text-white">
+            {current + 1} / {media.length}
+          </span>
+        )}
+      </button>
+      {media.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
+          {media.map((src, i) => (
+            <button
+              key={src}
+              type="button"
+              onClick={() => onShot(i)}
+              aria-label={`Show screenshot ${i + 1}`}
+              aria-current={i === current}
+              className={`relative aspect-video w-20 shrink-0 overflow-hidden rounded-md bg-white transition md:w-24 ${
+                i === current
+                  ? "ring-wine ring-2"
+                  : "opacity-70 hover:opacity-100"
+              }`}
+            >
+              <Image
+                src={src}
+                alt=""
+                fill
+                sizes="96px"
+                className="object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Chips in config order (most important first), with "+N more" past a width-based limit. */
+function ChipList({ label, items }: { label: string; items: string[] }) {
+  const [wide, setWide] = useState(false);
+  const [all, setAll] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const sync = () => setWide(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  const limit = wide ? 10 : 6;
+  const shown = all ? items : items.slice(0, limit);
+  const hidden = items.length - shown.length;
+  return (
+    <div>
+      <p className="text-rose mb-1.5 text-[11px] font-semibold tracking-wider uppercase">
+        {label}
+      </p>
+      <div className="flex flex-wrap gap-2">
+        {shown.map((item) => (
+          <span
+            key={item}
+            className="bg-petal-deep text-ink rounded-full px-2.5 py-0.5 text-xs font-medium md:text-sm"
+          >
+            {item}
+          </span>
+        ))}
+        {(hidden > 0 || (all && items.length > limit)) && (
+          <button
+            type="button"
+            onClick={() => setAll((a) => !a)}
+            className="text-wine rounded-full px-2 py-0.5 text-xs font-semibold hover:underline md:text-sm"
+          >
+            {all ? "Show less" : `+${hidden} more`}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** The long write-up, folded away until asked for. */
+function ReadMore({ html }: { html: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div>
+      {open && (
+        <div
+          className="text-ink-soft mb-2 text-sm leading-relaxed whitespace-pre-line md:text-base [&_strong]:text-ink"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      )}
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="text-wine text-sm font-semibold hover:underline"
+      >
+        {open ? "Show less ↑" : "Read more ↓"}
+      </button>
+    </div>
+  );
+}
+
 function ProjectDetail({
   items,
   label,
@@ -124,15 +263,41 @@ function ProjectDetail({
   onIndexChange: (i: number | null) => void;
 }) {
   const project = index === null ? undefined : items[index];
+  const [shot, setShot] = useState(0);
+  // While the photo viewer is up the card steps aside, and comes back on exit.
+  const [viewing, setViewing] = useState(false);
+  const open = project !== undefined && !viewing;
   const close = useCallback(() => onIndexChange(null), [onIndexChange]);
-  useCloseOnScroll(project !== undefined, close);
+  useCloseOnScroll(open, close);
   const go = (step: number) => {
     if (index === null) return;
+    setShot(0);
     onIndexChange((index + step + items.length) % items.length);
+  };
+  const view = (i: number) => {
+    if (!project) return;
+    setViewing(true);
+    openPhotoViewer(
+      project.media.map((src, n) => ({
+        src,
+        alt: `${project.title} screenshot ${n + 1}`,
+        caption: project.title,
+      })),
+      i,
+      () => setViewing(false),
+    );
   };
 
   return (
-    <Dialog open={project !== undefined} onOpenChange={(o) => !o && close()}>
+    <Dialog
+      open={open}
+      onOpenChange={(o) => {
+        if (!o) {
+          setShot(0);
+          close();
+        }
+      }}
+    >
       <DialogContent
         data-scroll-keep
         className="bg-petal text-ink top-auto bottom-0 max-h-[85dvh] max-w-none translate-y-0 gap-3 overflow-y-auto rounded-t-2xl rounded-b-none border-none p-5 sm:top-[50%] sm:bottom-auto sm:max-w-2xl sm:translate-y-[-50%] sm:rounded-2xl md:w-[min(1180px,86vw)] md:max-w-none md:p-8"
@@ -166,16 +331,14 @@ function ProjectDetail({
                 </span>
               )}
             </div>
-            {project.media[0] && (
-              <div className="relative aspect-video overflow-hidden rounded-lg bg-white shadow-md md:row-span-5 md:mt-2">
-                <Image
-                  src={project.media[0]}
-                  alt={`${project.title} screenshot`}
-                  fill
-                  sizes="(min-width: 768px) 640px, 100vw"
-                  className="object-cover"
-                />
-              </div>
+            {project.media.length > 0 && (
+              <Gallery
+                media={project.media}
+                title={project.title}
+                shot={shot}
+                onShot={setShot}
+                onView={view}
+              />
             )}
             <DialogTitle className="text-ink text-xl font-bold md:mt-2 md:text-3xl">
               {project.title}
@@ -183,16 +346,9 @@ function ProjectDetail({
             <DialogDescription className="text-ink-soft text-sm md:text-base md:leading-relaxed">
               {project.subtitle}
             </DialogDescription>
-            <div className="flex flex-wrap gap-2">
-              {project.tools.slice(0, 6).map((tool) => (
-                <span
-                  key={tool}
-                  className="bg-petal-deep text-ink rounded-full px-2.5 py-0.5 text-xs font-medium md:text-sm"
-                >
-                  {tool}
-                </span>
-              ))}
-            </div>
+            <ReadMore key={`${project.slug}-more`} html={project.description} />
+            <ChipList key={`${project.slug}-skills`} label="Skills" items={project.skills} />
+            <ChipList key={`${project.slug}-tools`} label="Tools" items={project.tools} />
             <div className="flex items-center gap-3 pt-1">
               {project.link && (
                 <a

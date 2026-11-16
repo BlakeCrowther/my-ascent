@@ -121,7 +121,7 @@ export function ContactSection() {
 
   if (isSubmitted) {
     return (
-      <section id="contact" className="relative min-h-dvh py-20">
+      <section id="contact" className="relative min-h-svh py-20">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
             <motion.div
@@ -177,7 +177,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="relative min-h-dvh py-20">
+    <section id="contact" className="relative min-h-svh py-20">
       <div className="container mx-auto px-4">
         <div ref={containerRef} className="mx-auto max-w-6xl">
           {/* Header */}
@@ -188,7 +188,7 @@ export function ContactSection() {
             animate={isInView ? "visible" : "hidden"}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            <h2 className="mb-6 text-5xl font-bold">Join the ascent</h2>
+            <h2 className="mb-6 text-5xl font-bold">Follow the ascent</h2>
           </motion.div>
 
           <div className="text-sub-text grid gap-8 lg:grid-cols-5">

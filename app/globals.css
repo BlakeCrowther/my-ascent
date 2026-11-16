@@ -235,3 +235,23 @@ body {
 ::-webkit-scrollbar-thumb {
   display: block;
 } */
+/* Caption under a photo in the full-screen viewer (components/timeline/photoViewer.ts). */
+.pswp__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 0 20px max(20px, env(safe-area-inset-bottom));
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+}
+.pswp__caption-title {
+  font-family: var(--font-caveat), cursive;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+.pswp__caption-note {
+  margin: 4px auto 0;
+  max-width: 32rem;
+  font-size: 0.875rem;
+  opacity: 0.8;
+}

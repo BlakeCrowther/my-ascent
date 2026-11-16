@@ -7,7 +7,7 @@ import { useScroll } from "framer-motion";
 
 const ROLES = [
   "AI Lead",
-  "Data Scientist (M.A.S.)",
+  "Data Scientist (Master's)",
   "AI/ML Explorer",
   "Full Stack Developer",
   "UI/UX Enthusiast",
@@ -53,7 +53,7 @@ export function WelcomeSection() {
   };
 
   return (
-    <div className="relative flex h-dvh w-full flex-col items-center justify-center text-center">
+    <div className="relative flex h-svh w-full flex-col items-center justify-center text-center">
       <h1 className="text-5xl font-bold sm:text-6xl lg:text-7xl">
         My ascent as a
       </h1>

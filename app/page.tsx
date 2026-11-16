@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react";
 
 import { Climber } from "@/components/climber/Climber";
 import { ContactSection } from "@/components/contact/ContactSection";
-import { ProjectsSection } from "@/components/projects/ProjectsSection";
 import { TimelineSection } from "@/components/timeline/TimelineSection";
+import { PitchNav } from "@/components/timeline/PitchPanels";
 import { WelcomeSection } from "@/components/welcome/WelcomeSection";
 import { useInView } from "framer-motion";
 
@@ -25,12 +25,10 @@ export default function Home() {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const welcomeRef = useRef(null);
   const climbRef = useRef(null);
-  const projectsRef = useRef(null);
   const contactRef = useRef(null);
 
   const welcomeInView = useInView(welcomeRef, { amount: 0.3 });
   const climbInView = useInView(climbRef, { amount: 0.1 });
-  const projectsInView = useInView(projectsRef, { amount: 0.2 });
   const contactInView = useInView(contactRef, { amount: 0.2 });
 
   useEffect(() => {
@@ -38,12 +36,10 @@ export default function Home() {
       history.replaceState(null, "", " ");
     } else if (climbInView) {
       history.replaceState(null, "", "#climb");
-    } else if (projectsInView) {
-      history.replaceState(null, "", "#projects");
     } else if (contactInView) {
       history.replaceState(null, "", "#contact");
     }
-  }, [welcomeInView, climbInView, projectsInView, contactInView]);
+  }, [welcomeInView, climbInView, contactInView]);
 
   return (
     // We set a black background as a fallback.
@@ -77,13 +73,14 @@ export default function Home() {
       </div>
 
       <Climber containerRef={backgroundRef} />
+      <PitchNav />
 
       {/* This container provides the scrollable space. It's on top of the fixed background. */}
       {/* Clicks pass through to the route; interactive sections opt back in. */}
       <div className="pointer-events-none relative z-20 text-white">
         <section
           ref={welcomeRef}
-          className="flex min-h-dvh items-center justify-center"
+          className="flex min-h-svh items-center justify-center"
         >
           <WelcomeSection />
         </section>
@@ -97,17 +94,9 @@ export default function Home() {
         </section>
 
         <section
-          ref={projectsRef}
-          id="projects"
-          className="pointer-events-auto my-12 flex min-h-dvh items-center justify-center px-4 py-12 pt-40 text-white sm:px-6 sm:pt-12 md:my-72 lg:px-8"
-        >
-          <ProjectsSection />
-        </section>
-
-        <section
           ref={contactRef}
           id="contact"
-          className="pointer-events-auto flex min-h-dvh items-center justify-center px-4 text-white sm:px-6 lg:px-8"
+          className="pointer-events-auto flex min-h-svh items-center justify-center px-4 text-white sm:px-6 lg:px-8"
         >
           <ContactSection />
         </section>

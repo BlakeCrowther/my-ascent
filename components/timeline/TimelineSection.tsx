@@ -15,6 +15,8 @@ import { FilmFrame } from "@/components/timeline/FilmFrame";
 import Image from "next/image";
 import { MotionCard } from "@/components/ui/card";
 import { ProjectPolaroids } from "@/components/timeline/ProjectPolaroids";
+import { REVEAL } from "@/components/timeline/reveal";
+import { navLabel } from "@/components/timeline/pitchNav";
 import { climbFilm } from "@/config/climbFilm";
 
 const KIND_ICON: Record<MilestoneKind, typeof Briefcase> = {
@@ -77,9 +79,11 @@ function MilestoneCard({
   milestone: Milestone;
   index: number;
 }) {
+  const next = timeline[index + 1];
   const ref = useRef<HTMLLIElement>(null);
-  const inView = useInView(ref, { amount: 0.4 });
+  const inView = useInView(ref, REVEAL);
   const Icon = KIND_ICON[milestone.kind];
+  const isIntro = milestone.kind === "intro";
   const isMinor = milestone.kind === "project";
   const showPitch = milestone.kind !== "intro" && milestone.kind !== "summit";
 
@@ -88,20 +92,16 @@ function MilestoneCard({
       ref={ref}
       id={`climb-${milestone.id}`}
       data-climb-t={milestone.landmark.t}
-      className={`flex min-h-[70dvh] flex-col justify-center py-8 md:grid md:min-h-[80dvh] md:grid-cols-[34%_30vw_minmax(0,1fr)] md:gap-x-[3vw] ${
-        milestone.projects ? "md:items-start md:pt-[12vh]" : "md:items-center"
-      }`}
+      className="flex min-h-[70svh] flex-col justify-center py-8 md:min-h-[80svh]"
     >
-      {/* Right column; with projects it stays put while they scroll by. */}
+      {/* One lane: centred on the page, pushed right only when the topo needs the room. */}
       <div
-        className={`mr-14 w-full sm:mx-auto md:col-start-3 md:row-start-1 md:mr-[8%] md:ml-0 ${
-          isMinor ? "max-w-md" : "max-w-xl"
-        } ${milestone.projects ? "md:sticky md:top-[12vh]" : ""}`}
+        className={`mr-14 w-full max-w-xl sm:mx-auto md:mr-0 md:ml-[max(26.5rem,calc((100%-42rem)/2))] md:w-[42rem] md:max-w-[calc(100%-28.5rem)]`}
       >
         <MotionCard
-          initial={{ opacity: 0, y: 60 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="pointer-events-auto w-full gap-4"
         >
           <div className="text-rose flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold tracking-wider uppercase">
@@ -116,36 +116,40 @@ function MilestoneCard({
             </span>
           </div>
 
-          <div className="flex gap-4">
-            <div className="min-w-0 flex-1">
-              {milestone.dates && (
-                <p className="text-ink-soft text-sm">{milestone.dates}</p>
-              )}
-              <h3
-                className={`text-ink font-bold ${
-                  isMinor ? "text-xl" : "text-2xl"
-                }`}
-              >
-                {milestone.title}
-              </h3>
-              {milestone.org && (
-                <p className="text-wine font-medium">{milestone.org}</p>
-              )}
-            </div>
-            {milestone.lifePhoto && (
-              <div className="relative size-20 shrink-0 overflow-hidden rounded-lg sm:size-24">
-                <Image
-                  src={milestone.lifePhoto}
-                  alt=""
-                  fill
-                  sizes="96px"
-                  className="object-cover"
-                />
+          <div className="flow-root [&>p]:mt-4">
+            {milestone.lifePhoto && isIntro && (
+              <div className="relative float-left mr-4 mb-2 size-32 overflow-hidden rounded-lg sm:size-40">
+                <Image src={milestone.lifePhoto} alt="" fill sizes="160px" className="object-cover" />
               </div>
             )}
+            <div className="flex gap-4">
+              <div className="min-w-0 flex-1">
+                {milestone.dates && (
+                  <p className="text-ink-soft text-sm">{milestone.dates}</p>
+                )}
+                <h3
+                  className={`text-ink font-bold ${
+                    isMinor ? "text-xl" : "text-2xl"
+                  }`}
+                >
+                  {milestone.title}
+                </h3>
+                {milestone.org && (
+                  <p className="text-wine font-medium">{milestone.org}</p>
+                )}
+              </div>
+              {milestone.lifePhoto && !isIntro && (
+                <div className="relative size-20 shrink-0 overflow-hidden rounded-lg sm:size-24">
+                  <Image src={milestone.lifePhoto} alt="" fill sizes="96px" className="object-cover" />
+                </div>
+              )}
+            </div>
+          {milestone.summary.split("\n\n").map((para) => (
+            <p key={para} className="text-ink-soft">
+              {para}
+            </p>
+          ))}
           </div>
-
-          <p className="text-ink-soft">{milestone.summary}</p>
 
           {milestone.highlights && (
             <ul className="text-ink-soft list-disc space-y-1 pl-5 text-sm">
@@ -168,9 +172,22 @@ function MilestoneCard({
             </div>
           )}
         </MotionCard>
+        {next && (
+          <div className="border-wine/25 bg-[#f1d3cf]/95 pointer-events-auto mt-3 rounded-xl border px-4 py-3 shadow-md backdrop-blur-sm md:hidden">
+            <p className="text-rose text-[11px] font-semibold tracking-wider uppercase">
+              Next ·{" "}
+              {next.kind === "summit"
+                ? next.landmark.name
+                : `Pitch ${index + 1} · ${next.landmark.name}`}
+            </p>
+            <p className="font-hand text-ink text-2xl leading-tight">
+              {navLabel(next)}
+            </p>
+          </div>
+        )}
       </div>
       {milestone.projects && (
-        <div className="mr-14 w-full max-w-xl sm:mx-auto md:col-start-2 md:row-start-1 md:mx-0 md:max-w-none">
+        <div className={`mr-14 w-full max-w-xl sm:mx-auto md:mt-6 md:mr-0 md:ml-[max(26.5rem,calc((100%-42rem)/2))] md:w-[42rem] md:max-w-[calc(100%-28.5rem)]`}>
           <ProjectPolaroids
             slugs={milestone.projects}
             label={milestone.org ?? milestone.title}

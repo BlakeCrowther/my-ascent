@@ -17,47 +17,56 @@ export type FilmFrame = {
   frame: string;
   /** Optional handwritten aside on a pinned slip of paper. */
   note?: string;
+  /** Shot with the camera turned on its side. */
+  portrait?: boolean;
 };
 
 /** Film stock printed along the edge of every frame. */
 // TODO: confirm the stock from the scans or lab envelope.
 export const FILM_STOCK = "PORTRA 400";
 
-// TODO: swap placeholders for real scans and set each `t` to where it was shot.
-const PLACEHOLDER = "/images/background.webp";
-
+// TODO: confirm each `t`, caption, and frame number against where it was shot.
 export const climbFilm: FilmFrame[] = [
   {
-    id: "film-freeblast",
-    src: PLACEHOLDER,
-    alt: "Racking up at the base of Freeblast",
-    t: 0.14,
-    caption: "Day 1 · Freeblast",
-    frame: "04",
+    id: "film-camp",
+    src: "/images/climb/camp4.webp",
+    alt: "The four of us with coffee mugs at camp in the valley, El Cap behind the trees",
+    t: 0.02,
+    caption: "Coffee before the wall",
+    frame: "03",
     note: "Every photo of the climb was shot on 35mm film, developed, and scanned.",
   },
   {
-    id: "film-muir",
-    src: PLACEHOLDER,
-    alt: "Hauling up the Muir Wall",
-    t: 0.38,
-    caption: "Hauling the Muir Wall",
-    frame: "11",
+    id: "film-portaledge",
+    src: "/images/climb/portaledge.webp",
+    alt: "Two climbers in sleeping bags on a portaledge, looking down the wall",
+    t: 0.3,
+    caption: "Night on the portaledge",
+    frame: "12",
   },
   {
-    id: "film-campv",
-    src: PLACEHOLDER,
-    alt: "Bivy on the ledge at Camp V",
-    t: 0.62,
-    caption: "Camp V bivy",
-    frame: "19",
+    id: "film-pooh",
+    src: "/images/climb/pooh.webp",
+    alt: "A climber in a Winnie the Pooh costume at a hanging belay above the valley",
+    t: 0.54,
+    caption: "Belay snack, dressed as Pooh",
+    frame: "21",
   },
   {
-    id: "film-corners",
-    src: PLACEHOLDER,
-    alt: "Looking down from Changing Corners",
-    t: 0.92,
-    caption: "Almost there",
-    frame: "31",
+    id: "film-clouds",
+    src: "/images/climb/clouds.webp",
+    alt: "Two climbers in helmets grinning as clouds roll over the valley rim",
+    t: 0.8,
+    caption: "Clouds rolling in up high",
+    frame: "29",
+    portrait: true,
+  },
+  {
+    id: "film-summit",
+    src: "/images/climb/summit.webp",
+    alt: "The four of us on the summit slabs with Half Dome behind",
+    t: 0.93,
+    caption: "Topped out · Half Dome behind",
+    frame: "35",
   },
 ];

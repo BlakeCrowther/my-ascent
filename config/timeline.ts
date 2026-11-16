@@ -61,13 +61,13 @@ export const timeline: Milestone[] = [
     title: "Hey, I'm Blake",
     landmark: LANDMARKS.camp,
     summary:
-      "AI lead and full-stack engineer in San Diego, rock climber everywhere else. I like building things that are useful, not just clever. This site started as a goal: one day, climb El Capitan. Scroll to follow the route, or tap a dot on the wall.",
+      "AI lead and full-stack engineer in San Diego, rock climber everywhere else. I like building things that are useful, not just clever.\n\nI studied Computer Science at Loyola Marymount, spent years working across the stack, then earned a master's in Data Science and Engineering at UC San Diego, focused on machine learning and AI engineering. Most recently I led AI at Space Heater: the models, the systems around them, and the product people actually use.\n\nOff the keyboard, I climb, surf, and make room for the occasional whimsical side quest. This site started as a goal: one day, climb El Capitan. On October 26, 2026, we topped out, via Triple Direct. Scroll to follow the route, or tap a dot on the wall.",
     lifePhoto: "/images/about/Joshua_Bouldering.webp",
   },
   {
     id: "lmu-start",
     kind: "education",
-    title: "Started at Loyola Marymount",
+    title: "Started bachelor's at Loyola Marymount",
     org: "B.S. Computer Science",
     dates: "2016",
     landmark: LANDMARKS.base,
@@ -79,8 +79,8 @@ export const timeline: Milestone[] = [
   {
     id: "ticketmaster",
     kind: "work",
-    title: "Software Engineering Intern",
-    org: "Ticketmaster",
+    title: "Internship at Ticketmaster",
+    org: "Software Engineering",
     dates: "Summer 2019",
     landmark: LANDMARKS.freeblast,
     summary:
@@ -91,7 +91,7 @@ export const timeline: Milestone[] = [
   {
     id: "lmu-grad",
     kind: "education",
-    title: "Graduated from Loyola Marymount",
+    title: "Earned bachelor's, Loyola Marymount",
     org: "B.S. Computer Science",
     dates: "2020",
     landmark: LANDMARKS.halfDollar,
@@ -101,7 +101,7 @@ export const timeline: Milestone[] = [
   {
     id: "headsup",
     kind: "work",
-    title: "Full-Stack Software Engineer",
+    title: "Full-Stack Engineer",
     org: "HeadsUp Lab, LMU",
     dates: "2019 – 2021",
     landmark: LANDMARKS.mammoth,
@@ -139,8 +139,8 @@ export const timeline: Milestone[] = [
   {
     id: "ucsd-start",
     kind: "education",
-    title: "Started the M.A.S. in Data Science and Engineering",
-    org: "UC San Diego",
+    title: "Started master's at UC San Diego",
+    org: "Data Science and Engineering",
     dates: "2023",
     landmark: LANDMARKS.grayLedges,
     summary:
@@ -182,8 +182,8 @@ export const timeline: Milestone[] = [
   {
     id: "ucsd-grad",
     kind: "education",
-    title: "Earned the M.A.S. in Data Science and Engineering",
-    org: "UC San Diego",
+    title: "Earned master's, UC San Diego",
+    org: "Data Science and Engineering",
     dates: "2025",
     landmark: LANDMARKS.pancakeFlake,
     summary: "Capstone done, degree in hand.",
@@ -194,10 +194,10 @@ export const timeline: Milestone[] = [
     // TODO: confirm title and start date.
     title: "AI Lead",
     org: "Space Heater",
-    dates: "2025 – Now",
+    dates: "2025 – 2026",
     landmark: LANDMARKS.changingCorners,
     summary:
-      "Leading AI across the whole picture: the models, the systems around them, and the product people actually use.",
+      "Led AI across the whole picture: the models, the systems around them, and the product people actually use.",
     tags: ["AI Engineering", "Full-Stack"],
   },
   {

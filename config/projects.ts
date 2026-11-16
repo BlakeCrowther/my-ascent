@@ -3,10 +3,13 @@ export type Project = {
   slug: string;
   title: string;
   subtitle: string;
+  /** Full write-up (HTML). Not shown in the climb UI; kept for the future search. */
   description: string;
   icon: string;
   media: string[];
+  /** Not shown in the climb UI; kept for search and filtering. */
   skills: string[];
+  /** The climb's project dialog shows the first 6; the rest are kept for search. */
   tools: string[];
   github?: string;
   link?: string;
