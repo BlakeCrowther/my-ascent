@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# my-ascent
 
-## Getting Started
+Rock-climbing-themed portfolio: a scroll-driven climb up El Capitan's Triple Direct. Next.js 15, React 19, Tailwind 4, Framer Motion. Deployed on Vercel.
 
-First, run the development server:
+## Quickstart
+
+Needs Node 24 (`.nvmrc`). `corepack enable` once makes `pnpm` resolve to the version pinned in `package.json`.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm bootstrap   # install + create .env
+pnpm dev         # https://my-ascent.localhost via portless
+pnpm verify      # lint + typecheck + test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`pnpm dev` runs through [portless](https://github.com/vercel-labs/portless): Next gets a free `PORT` and a stable URL. In a linked git worktree, the last segment of the branch name becomes a subdomain (`feat/nav` → `https://nav.my-ascent.localhost`), so worktrees run side by side.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The first HTTPS run creates a local certificate authority, adds it to the system trust store, and may ask for `sudo`. Agents and sandboxes skip that:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `PORTLESS_HTTPS=0 pnpm dev`: plain HTTP through the proxy (`http://my-ascent.localhost`)
+- `PORTLESS=0 pnpm dev`: no proxy; Next on its default port
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+None required. See `.env.example` for the format used when one is added.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Cloud environments
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+No secrets are needed. Every tool runs one command:
 
-## Deploy on Vercel
+| Tool                | Setup                                                                                  |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| Claude Code (cloud) | Environment setup script: `corepack enable && pnpm bootstrap`                          |
+| Cursor              | `.cursor/environment.json` (`install`) and `.cursor/worktrees.json`; already committed |
+| Codex               | Setup script field: `corepack enable && pnpm bootstrap`                                |
+| Copilot             | `.github/workflows/copilot-setup-steps.yml`; already committed                         |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Known limits: in a sandbox run `PORTLESS=0 pnpm dev` (or `PORTLESS_HTTPS=0`). There are no backing services.
