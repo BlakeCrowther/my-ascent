@@ -270,7 +270,11 @@ export function Climber({ containerRef }: ClimberProps) {
                   goTo();
                 }
               }}
-              style={{ pointerEvents: "all", cursor: "pointer", outline: "none" }}
+              style={{
+                pointerEvents: "all",
+                cursor: "pointer",
+                outline: "none",
+              }}
             >
               <title>{b.label}</title>
               {/* Oversized invisible target so dots are easy to hit on touch. */}

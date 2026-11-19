@@ -162,7 +162,9 @@ export const timeline: Milestone[] = [
     landmark: LANDMARKS.campV,
     summary:
       "Algorithms to optimize satellite capacity allocation across a large search space, built on network demand profiles from usage and satellite data.",
-    highlights: ["Cut model training time 40% with Bayesian tuning on SageMaker"],
+    highlights: [
+      "Cut model training time 40% with Bayesian tuning on SageMaker",
+    ],
     tags: ["Python", "Postgres", "SageMaker"],
     lifePhoto: "/images/about/viasat.webp",
   },

@@ -106,10 +106,10 @@
 .dark {
   --background: oklch(0.147 0.004 49.25);
   --foreground: oklch(0.985 0.001 106.423);
-  
+
   /* Custom sub-text color for dark mode */
   --sub-text: oklch(0.7 0.02 240);
-  
+
   --card: oklch(0.216 0.006 56.043);
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
