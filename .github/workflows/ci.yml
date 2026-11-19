@@ -20,5 +20,5 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: pnpm
-      - run: pnpm run setup
+      - run: pnpm bootstrap
       - run: pnpm verify
