@@ -152,8 +152,8 @@ export function ContactSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                I'll get back to you as soon as possible. In the meantime, feel
-                free to check out my projects or connect with me on social
+                I&apos;ll get back to you as soon as possible. In the meantime,
+                feel free to check out my projects or connect with me on social
                 media.
               </motion.p>
               <motion.div
@@ -203,8 +203,8 @@ export function ContactSection() {
               >
                 <h3 className="mb-2 text-3xl font-bold">Get In Touch</h3>
                 <p className="text-sub-text mb-8">
-                  Whether you're looking to collaborate or just want to say hi,
-                  I'd love to hear from you!
+                  Whether you&apos;re looking to collaborate or just want to say
+                  hi, I&apos;d love to hear from you!
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
