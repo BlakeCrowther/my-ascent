@@ -138,7 +138,6 @@ export function Climber({ containerRef }: ClimberProps) {
     if (!path || !scale) return; // Wait for path and scale to be ready
 
     // 1. Get Path Information
-    const pathBBox = path.getBBox();
     // console.log("--- DEBUG INFO ---");
     // console.log("Path Bounding Box:", {
     //   x: pathBBox.x.toFixed(2),

@@ -7,7 +7,7 @@
     "dev": "portless run next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . && prettier --check .",
+    "lint": "eslint . --max-warnings 0 && prettier --check .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -50,5 +50,13 @@
   "packageManager": "pnpm@10.12.1",
   "engines": {
     "node": ">=24"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp",
+      "unrs-resolver"
+    ]
   }
 }
