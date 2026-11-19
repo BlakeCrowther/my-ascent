@@ -24,11 +24,11 @@ None required. See `.env.example` for the format used when one is added.
 
 No secrets are needed. Every tool only has to run one command:
 
-| Tool | Setup |
-|---|---|
-| Claude Code (cloud) | Environment setup script: `corepack enable && pnpm run setup` |
-| Cursor | `.cursor/environment.json` (`install`) and `.cursor/worktrees.json`; already committed |
-| Codex | Setup script field: `corepack enable && pnpm run setup` |
-| Copilot | `.github/workflows/copilot-setup-steps.yml`; already committed |
+| Tool                | Setup                                                                                  |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| Claude Code (cloud) | Environment setup script: `corepack enable && pnpm run setup`                          |
+| Cursor              | `.cursor/environment.json` (`install`) and `.cursor/worktrees.json`; already committed |
+| Codex               | Setup script field: `corepack enable && pnpm run setup`                                |
+| Copilot             | `.github/workflows/copilot-setup-steps.yml`; already committed                         |
 
 Known limits: `pnpm dev` needs portless, which wants Node 24+ and, for HTTPS, a local CA; in a sandbox use `PORTLESS=0 pnpm dev`. There are no backing services.
