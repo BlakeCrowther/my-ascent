@@ -1,0 +1,7 @@
+pnpm-lock.yaml
+.next
+public
+.claude
+.vscode
+.vercel
+coverage
