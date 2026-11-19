@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "node scripts/bootstrap.mjs",
-    "dev": "next dev --turbopack",
+    "dev": "portless run next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . && prettier --check .",
@@ -39,6 +39,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.9",
     "eslint-config-prettier": "^10.1.5",
+    "portless": "^0.18.1",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "tailwindcss": "^4",
