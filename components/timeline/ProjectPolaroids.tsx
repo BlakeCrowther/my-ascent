@@ -88,7 +88,7 @@ export function ProjectPolaroids({
 
   return (
     <div className="pointer-events-auto">
-      <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pt-5 pb-3 [scrollbar-width:none] sm:flex-wrap sm:justify-center sm:gap-5 sm:overflow-visible md:mx-0 md:grid md:px-0 md:[&>*]:w-full md:grid-cols-4 md:gap-x-[1.5vw] md:gap-y-6 md:[&>*:nth-child(even)]:translate-y-6">
+      <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pt-5 pb-3 [scrollbar-width:none] sm:flex-wrap sm:justify-center sm:gap-5 sm:overflow-visible md:mx-0 md:grid md:grid-cols-4 md:gap-x-[1.5vw] md:gap-y-6 md:px-0 md:[&>*]:w-full md:[&>*:nth-child(even)]:translate-y-6">
         {items.map((project, i) => (
           <Polaroid
             key={project.slug}
@@ -235,7 +235,7 @@ function ReadMore({ html }: { html: string }) {
     <div>
       {open && (
         <div
-          className="text-ink-soft mb-2 text-sm leading-relaxed whitespace-pre-line md:text-base [&_strong]:text-ink"
+          className="text-ink-soft [&_strong]:text-ink mb-2 text-sm leading-relaxed whitespace-pre-line md:text-base"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       )}
@@ -347,8 +347,16 @@ function ProjectDetail({
               {project.subtitle}
             </DialogDescription>
             <ReadMore key={`${project.slug}-more`} html={project.description} />
-            <ChipList key={`${project.slug}-skills`} label="Skills" items={project.skills} />
-            <ChipList key={`${project.slug}-tools`} label="Tools" items={project.tools} />
+            <ChipList
+              key={`${project.slug}-skills`}
+              label="Skills"
+              items={project.skills}
+            />
+            <ChipList
+              key={`${project.slug}-tools`}
+              label="Tools"
+              items={project.tools}
+            />
             <div className="flex items-center gap-3 pt-1">
               {project.link && (
                 <a

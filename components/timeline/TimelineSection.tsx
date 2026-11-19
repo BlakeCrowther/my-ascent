@@ -119,7 +119,13 @@ function MilestoneCard({
           <div className="flow-root [&>p]:mt-4">
             {milestone.lifePhoto && isIntro && (
               <div className="relative float-left mr-4 mb-2 size-32 overflow-hidden rounded-lg sm:size-40">
-                <Image src={milestone.lifePhoto} alt="" fill sizes="160px" className="object-cover" />
+                <Image
+                  src={milestone.lifePhoto}
+                  alt=""
+                  fill
+                  sizes="160px"
+                  className="object-cover"
+                />
               </div>
             )}
             <div className="flex gap-4">
@@ -140,15 +146,21 @@ function MilestoneCard({
               </div>
               {milestone.lifePhoto && !isIntro && (
                 <div className="relative size-20 shrink-0 overflow-hidden rounded-lg sm:size-24">
-                  <Image src={milestone.lifePhoto} alt="" fill sizes="96px" className="object-cover" />
+                  <Image
+                    src={milestone.lifePhoto}
+                    alt=""
+                    fill
+                    sizes="96px"
+                    className="object-cover"
+                  />
                 </div>
               )}
             </div>
-          {milestone.summary.split("\n\n").map((para) => (
-            <p key={para} className="text-ink-soft">
-              {para}
-            </p>
-          ))}
+            {milestone.summary.split("\n\n").map((para) => (
+              <p key={para} className="text-ink-soft">
+                {para}
+              </p>
+            ))}
           </div>
 
           {milestone.highlights && (
@@ -173,7 +185,7 @@ function MilestoneCard({
           )}
         </MotionCard>
         {next && (
-          <div className="border-wine/25 bg-[#f1d3cf]/95 pointer-events-auto mt-3 rounded-xl border px-4 py-3 shadow-md backdrop-blur-sm md:hidden">
+          <div className="border-wine/25 pointer-events-auto mt-3 rounded-xl border bg-[#f1d3cf]/95 px-4 py-3 shadow-md backdrop-blur-sm md:hidden">
             <p className="text-rose text-[11px] font-semibold tracking-wider uppercase">
               Next ·{" "}
               {next.kind === "summit"
@@ -187,7 +199,9 @@ function MilestoneCard({
         )}
       </div>
       {milestone.projects && (
-        <div className={`mr-14 w-full max-w-xl sm:mx-auto md:mt-6 md:mr-0 md:ml-[max(26.5rem,calc((100%-42rem)/2))] md:w-[42rem] md:max-w-[calc(100%-28.5rem)]`}>
+        <div
+          className={`mr-14 w-full max-w-xl sm:mx-auto md:mt-6 md:mr-0 md:ml-[max(26.5rem,calc((100%-42rem)/2))] md:w-[42rem] md:max-w-[calc(100%-28.5rem)]`}
+        >
           <ProjectPolaroids
             slugs={milestone.projects}
             label={milestone.org ?? milestone.title}

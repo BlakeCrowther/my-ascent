@@ -71,7 +71,9 @@ export function WelcomeSection() {
         aria-label="Scroll to next section"
         onClick={handleChevronClick}
         className={`group absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer transition-opacity duration-700 ${
-          hidden ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"
+          hidden
+            ? "pointer-events-none opacity-0"
+            : "pointer-events-auto opacity-100"
         }`}
       >
         <ChevronDown

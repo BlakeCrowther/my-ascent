@@ -85,11 +85,7 @@ export default function Home() {
           <WelcomeSection />
         </section>
 
-        <section
-          ref={climbRef}
-          id="climb"
-          className="px-4 sm:px-6 lg:px-8"
-        >
+        <section ref={climbRef} id="climb" className="px-4 sm:px-6 lg:px-8">
           <TimelineSection />
         </section>
 
