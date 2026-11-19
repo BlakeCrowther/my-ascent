@@ -8,14 +8,14 @@ Rock-climbing-themed portfolio: a scroll-driven climb up El Capitan's Triple Dir
 - `components/`: `climber/` (route path + climber), `timeline/` (milestones, film frames, project panels), `welcome/`, `contact/`, `ui/` (shadcn)
 - `config/`: content as data (`timeline.ts`, `projects.ts`, `climbFilm.ts`). Edit content here, not in components.
 - `public/`: images (WebP), climber SVG
-- `tests/`, `scripts/`: Vitest tests; `setup` script
+- `tests/`, `scripts/`: Vitest tests; `bootstrap` script
 
 ## Commands
 
-pnpm only. Fresh worktree or sandbox: run `setup` first.
+pnpm only. Fresh worktree or sandbox: run `pnpm bootstrap` first. `bootstrap` is this repo's name for the standard `setup` command (`pnpm setup` is a pnpm builtin that edits shell config; never run it).
 
-- `pnpm run setup`: install + create `.env`. Never bare `pnpm setup` (pnpm builtin, edits shell config).
-- `pnpm dev`: Next dev via portless, URL printed on start. `PORTLESS=0 pnpm dev` skips the proxy.
+- `pnpm bootstrap`: install + create `.env`; fails on missing required vars.
+- `pnpm dev`: Next dev via portless, URL printed on start. Agents and sandboxes use `PORTLESS_HTTPS=0 pnpm dev` (no local CA or sudo) or `PORTLESS=0 pnpm dev` (no proxy). In a worktree the branch's last segment is the subdomain.
 - `pnpm lint`: eslint + prettier check. `pnpm format` fixes formatting.
 - `pnpm typecheck`, `pnpm test`
 - `pnpm verify`: lint + typecheck + test. CI runs this.
@@ -23,7 +23,7 @@ pnpm only. Fresh worktree or sandbox: run `setup` first.
 
 ## Testing
 
-Vitest, `tests/`. Only data-integrity and logic tests exist: `content.test.ts` checks config image paths exist in `public/`, project slugs resolve, and route positions stay ordered; `env.test.ts` covers the setup env check. Visual and animation changes have no automated tests: check them in the browser (`pnpm dev`) and attach a screenshot or recording to the PR.
+Vitest, `tests/`. Only data-integrity and logic tests exist: `content.test.ts` checks config image paths exist in `public/`, project slugs resolve, and route positions stay ordered; `env.test.ts` covers the bootstrap env check. Visual and animation changes have no automated tests: check them in the browser (`pnpm dev`) and attach a screenshot or recording to the PR.
 
 ## Deploy (Vercel)
 
