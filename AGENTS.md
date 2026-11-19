@@ -1,5 +1,36 @@
 # my-ascent
 
+Rock-climbing-themed portfolio: a scroll-driven climb up El Capitan's Triple Direct. Smooth animation and responsive UI matter. Next.js 15 (App Router), React 19, TypeScript, Tailwind 4, shadcn/ui, Framer Motion. Single page, no backend, no env vars.
+
+## Layout
+
+- `app/`: layout, page, global CSS
+- `components/`: `climber/` (route path + climber), `timeline/` (milestones, film frames, project panels), `welcome/`, `contact/`, `ui/` (shadcn)
+- `config/`: content as data (`timeline.ts`, `projects.ts`, `climbFilm.ts`). Edit content here, not in components.
+- `public/`: images (WebP), climber SVG
+- `tests/`, `scripts/`: Vitest tests; `bootstrap` script
+
+## Commands
+
+pnpm only. Fresh worktree or sandbox: run `pnpm bootstrap` first. `bootstrap` is this repo's name for the standard `setup` command (`pnpm setup` is a pnpm builtin that edits shell config; never run it).
+
+- `pnpm bootstrap`: install + create `.env`; fails on missing required vars.
+- `pnpm dev`: Next dev via portless, URL printed on start. Agents and sandboxes use `PORTLESS_HTTPS=0 pnpm dev` (no local CA or sudo) or `PORTLESS=0 pnpm dev` (no proxy). In a worktree the branch's last segment is the subdomain.
+- `pnpm lint`: eslint + prettier check. `pnpm format` fixes formatting.
+- `pnpm typecheck`, `pnpm test`
+- `pnpm verify`: lint + typecheck + test. CI runs this.
+- `pnpm build`: production build (not part of verify)
+
+## Testing
+
+Vitest, `tests/`. Only data-integrity and logic tests exist: `content.test.ts` checks config image paths exist in `public/`, project slugs resolve, and route positions stay ordered; `env.test.ts` covers the bootstrap env check. Visual and animation changes have no automated tests: check them in the browser (`pnpm dev`) and attach a screenshot or recording to the PR.
+
+## Deploy (Vercel)
+
+- Vercel deploys `main` to production and every PR to a preview; the preview check must pass.
+- `next.config.ts` sets `images.unoptimized` on purpose (Hobby plan image-optimization cap). Keep images pre-converted to WebP in `public/images`.
+- No env vars to configure. Node version comes from `engines.node`.
+
 <!-- dev-home:standards:start -->
 <!-- Managed by dev-home sync-standards.sh. Edit repo-rules.md in dev-home, not here. -->
 
