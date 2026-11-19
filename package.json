@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "setup": "node scripts/setup.mjs",
+    "bootstrap": "node scripts/bootstrap.mjs",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -48,6 +48,6 @@
   },
   "packageManager": "pnpm@10.12.1",
   "engines": {
-    "node": ">=20.19"
+    "node": ">=24"
   }
 }
