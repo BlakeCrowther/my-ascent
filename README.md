@@ -4,17 +4,20 @@ Rock-climbing-themed portfolio: a scroll-driven climb up El Capitan's Triple Dir
 
 ## Quickstart
 
-Needs Node 24 (`.nvmrc`) and pnpm (`corepack enable` picks the pinned version).
+Needs Node 24 (`.nvmrc`). `corepack enable` once makes `pnpm` resolve to the version pinned in `package.json`.
 
 ```bash
-pnpm run setup   # install + create .env
-pnpm dev         # http://<branch>.my-ascent.localhost via portless
+pnpm bootstrap   # install + create .env
+pnpm dev         # https://my-ascent.localhost via portless
 pnpm verify      # lint + typecheck + test
 ```
 
-Use `pnpm run setup`, not `pnpm setup`: the latter is a pnpm builtin that edits your shell config.
+`pnpm dev` runs through [portless](https://github.com/vercel-labs/portless): Next gets a free `PORT` and a stable URL. In a linked git worktree, the last segment of the branch name becomes a subdomain (`feat/nav` → `https://nav.my-ascent.localhost`), so worktrees run side by side.
 
-`PORTLESS=0 pnpm dev` runs Next directly on its default port, skipping the proxy.
+The first HTTPS run creates a local certificate authority, adds it to the system trust store, and may ask for `sudo`. Agents and sandboxes skip that:
+
+- `PORTLESS_HTTPS=0 pnpm dev`: plain HTTP through the proxy (`http://my-ascent.localhost`)
+- `PORTLESS=0 pnpm dev`: no proxy; Next on its default port
 
 ## Environment variables
 
@@ -22,13 +25,13 @@ None required. See `.env.example` for the format used when one is added.
 
 ## Cloud environments
 
-No secrets are needed. Every tool only has to run one command:
+No secrets are needed. Every tool runs one command:
 
 | Tool                | Setup                                                                                  |
 | ------------------- | -------------------------------------------------------------------------------------- |
-| Claude Code (cloud) | Environment setup script: `corepack enable && pnpm run setup`                          |
+| Claude Code (cloud) | Environment setup script: `corepack enable && pnpm bootstrap`                          |
 | Cursor              | `.cursor/environment.json` (`install`) and `.cursor/worktrees.json`; already committed |
-| Codex               | Setup script field: `corepack enable && pnpm run setup`                                |
+| Codex               | Setup script field: `corepack enable && pnpm bootstrap`                                |
 | Copilot             | `.github/workflows/copilot-setup-steps.yml`; already committed                         |
 
-Known limits: `pnpm dev` needs portless, which wants Node 24+ and, for HTTPS, a local CA; in a sandbox use `PORTLESS=0 pnpm dev`. There are no backing services.
+Known limits: in a sandbox run `PORTLESS=0 pnpm dev` (or `PORTLESS_HTTPS=0`). There are no backing services.
