@@ -6,11 +6,7 @@
  */
 
 export type MilestoneKind =
-  | "intro"
-  | "education"
-  | "work"
-  | "project"
-  | "summit";
+  "intro" | "education" | "work" | "project" | "summit";
 
 export type Landmark = {
   name: string;
