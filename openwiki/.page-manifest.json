@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/climb-model.md": {
+      "pageVersion": "sha256:8a084277ea56dfba5d56458ba304674fbd1d4631ef5f9ce6cae0dd001c98c8e2",
+      "completedBy": "claude-code",
+      "completedRunId": "6bd84352-4bda-4b1a-83a5-bc8ad60a801b",
+      "gitHead": "691ee0b225667adb7591a11205b9b3089fe0f085",
+      "sourceFingerprint": "sha256:36ca2e503ea9933ff0c56dc16d96e204bd08d3354448619375cb0f3879f8f3e4"
+    },
+    "/openwiki/architecture/page-structure.md": {
+      "pageVersion": "sha256:c32657074890486aabe74eaaef706c62997c7b3ae8d6e6017c5054d161847a6f",
+      "completedBy": "claude-code",
+      "completedRunId": "6bd84352-4bda-4b1a-83a5-bc8ad60a801b",
+      "gitHead": "691ee0b225667adb7591a11205b9b3089fe0f085",
+      "sourceFingerprint": "sha256:36ca2e503ea9933ff0c56dc16d96e204bd08d3354448619375cb0f3879f8f3e4"
+    },
+    "/openwiki/operations/toolchain-and-ci.md": {
+      "pageVersion": "sha256:70d9f9175f6663773cc65392c3a04fe8044292190284ed6e249967114e5ae9c9",
+      "completedBy": "claude-code",
+      "completedRunId": "6bd84352-4bda-4b1a-83a5-bc8ad60a801b",
+      "gitHead": "691ee0b225667adb7591a11205b9b3089fe0f085",
+      "sourceFingerprint": "sha256:36ca2e503ea9933ff0c56dc16d96e204bd08d3354448619375cb0f3879f8f3e4"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:7d805aa0f14a62d03a7290d4a5a95b0dfaf2c1caad5ac2f4cfdb375bb661dc1a",
+      "completedBy": "claude-code",
+      "completedRunId": "6bd84352-4bda-4b1a-83a5-bc8ad60a801b",
+      "gitHead": "691ee0b225667adb7591a11205b9b3089fe0f085",
+      "sourceFingerprint": "sha256:36ca2e503ea9933ff0c56dc16d96e204bd08d3354448619375cb0f3879f8f3e4"
+    }
+  }
+}

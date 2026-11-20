@@ -76,3 +76,9 @@ Comments are for humans. Default: none.
 - No dead or commented-out code. Update comments with the code.
 
 <!-- dev-home:standards:end -->
+
+<!-- OPENWIKI:START -->
+
+Codebase wiki in `openwiki/` (optional context; start at `openwiki/quickstart.md`). Source and tests are authoritative; don't hand-edit generated pages.
+
+<!-- OPENWIKI:END -->

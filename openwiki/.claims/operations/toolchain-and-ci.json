@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:70d9f9175f6663773cc65392c3a04fe8044292190284ed6e249967114e5ae9c9",
+  "claims": [
+    {
+      "id": "claim_44dddc4927054c4d9f66672503ae2df7",
+      "statement": "pnpm verify runs lint (zero warnings plus Prettier check), typecheck and test in sequence; dev runs Next through portless.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L5-L16",
+          "version": "repo-lines-v1:sha256:d6a7fe679fe0ea47e6083124dd68d4b4111cf5dff71e9479ab826e41817060ec:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ODMzZDU5NDljMDNhNDBjYTk1MjQ5MTYxMGE2NjU5NjQ0YjNhYTQ2NjM2MmY3OTkwMjBkYmYxOTgxNTQ3ZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhM2I0NjlkOWUwOTc1NzIyNDY2NjczNGM5ZWY3YjI1NGQ4ODUzNGY1ZDViYjcwOTg5NjA4MDVjNTUzZGMzMDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0MzQzZDUwZTUyY2ZjYTVkNzJiMjVhNDJhNGNkMTVhNzYzNzg5NjI2NzA2NDc5NTU4YzQzMTE3YmExZGE2MjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdmYTc3YTRmMmVlYmI2OGMxYWRmYjBiYTVmYzNhZjRiMDgzOWMwYTU3MWI4NDUyOTU4Mzc1YmY0NWVlMzgxYWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_79fb4cb3e2a549a49fb9602c40bbc9e5",
+      "statement": "bootstrap does a frozen install, creates .env from .env.example when missing, and exits non-zero listing required vars that are missing.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/bootstrap.mjs",
+          "version": "repo-file-v1:sha256:002d288b2ab3d3213a9a44d4dccf0de9a455c50913f4735f6abc83bb6f566c5a"
+        }
+      ]
+    },
+    {
+      "id": "claim_3630aa47e3cd463383511928fd3497f7",
+      "statement": "CI has a single verify job that runs pnpm bootstrap then pnpm verify on PRs and pushes to main.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml",
+          "version": "repo-file-v1:sha256:b0fb2a1a04f7476324cd65c70d2880bb828dd9a19f88eae9dabce57841526893"
+        }
+      ]
+    },
+    {
+      "id": "claim_10ad3dfc0ca043d6a62cb24c0f8f8fdc",
+      "statement": "next.config.ts disables Next image optimization so images are served statically, avoiding the Vercel Hobby plan cap.",
+      "evidence": [
+        {
+          "resource": "repo://next.config.ts",
+          "version": "repo-file-v1:sha256:ffae79c3dd6def541da8cd29519f5916836f9d481d156027df79611c91407783"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-20T00:31:46.360Z"
+  }
+}
