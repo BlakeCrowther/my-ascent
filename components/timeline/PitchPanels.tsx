@@ -10,7 +10,7 @@ import {
   useNavState,
 } from "./pitchNav";
 import { ChevronDown, ChevronRight, ChevronUp, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { timeline } from "@/config/timeline";
 
@@ -59,9 +59,12 @@ function ChapterList({
   onPick?: () => void;
 }) {
   const activeChapter = chapterOf(active);
-  const [manual, setManual] = useState<number | null>(null);
-  useEffect(() => setManual(null), [activeChapter]);
-  const open = manual ?? activeChapter;
+  // A manual choice only lasts while the reader stays in the chapter it was made in.
+  const [manual, setManual] = useState<{
+    chapter: number;
+    open: number;
+  } | null>(null);
+  const open = manual?.chapter === activeChapter ? manual.open : activeChapter;
 
   const go = (i: number) => {
     goToPitch(i);
@@ -103,7 +106,12 @@ function ChapterList({
           <button
             type="button"
             aria-expanded={open === ci}
-            onClick={() => setManual(open === ci ? -1 : ci)}
+            onClick={() =>
+              setManual({
+                chapter: activeChapter,
+                open: open === ci ? -1 : ci,
+              })
+            }
             className="hover:bg-petal-deep flex w-full items-center gap-3 rounded-lg px-2 py-1.5"
           >
             <span
