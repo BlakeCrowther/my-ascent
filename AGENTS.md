@@ -85,6 +85,18 @@ Written for a reader who switches in cold: the name or the first line should be 
 - Any pipeline or system of three or more stages gets a map (diagram plus table) in the repo, kept in step with renames.
 - Plans, reports and status: first line is the goal or result in plain words. Say what changed, what is verified, what is not. Restate where things stand; assume the reader forgot. Use a table or diagram over a paragraph for stages and comparisons.
 
+### Public-safe repos
+
+Every repo may go public, and history is public with it.
+
+- No absolute or home paths in tracked files (`/Users/...`). Use repo-relative paths; `~` or `$HOME` only in docs and setup scripts.
+- The repo ships code and synthetic data, never the owner's real data. Defaults, seeds, fixtures and mocks are made up. Real snapshots and backups stay gitignored or outside the repo.
+- Owner-specific labels (places, pet or people names shown in the UI) come from the app's own data or untracked config, not hardcoded. Names in docs, copy and examples are fine.
+- Never commit secrets, tokens, account or artifact IDs. Use placeholders (`<id>`) and env vars.
+- Verify with synthetic data. If a real-data check is needed, run it locally and commit only the result, not the data.
+- Before a repo goes public: `dev-home/public-check.sh <repo> --history` must be clean. If history has hits, publish a fresh repo from a squashed commit (or rewrite history) before flipping visibility.
+- Private words to scan for (names, places) go in `~/.config/dev-home/private-words`, never in a repo.
+
 <!-- dev-home:standards:end -->
 
 <!-- OPENWIKI:START -->
