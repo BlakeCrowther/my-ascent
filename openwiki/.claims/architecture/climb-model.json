@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:8a084277ea56dfba5d56458ba304674fbd1d4631ef5f9ce6cae0dd001c98c8e2",
+  "claims": [
+    {
+      "id": "claim_d96c60883bca4d4d936e21cfd0707b21",
+      "statement": "Timeline milestones and film frames share one route scale t (0 base camp to 1 summit); milestones get theirs from a named landmark, film frames carry their own.",
+      "evidence": [
+        {
+          "resource": "repo://config/climbFilm.ts#L10-L22",
+          "version": "repo-lines-v1:sha256:4da4699df749f9f38fc706cbce1793ba44012732d95e9653c76a9e1e89dc9ee7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5ZTk2MDA2ZGZmZjI0NDgwYWI4NmExMjM1NjA0YmI1M2YxYWZkMWRiOWE2NzQ2OTRjMmYyMjRlNjIzMTI3NTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3ZmYyMzVjOTQyNjMzYzQ0YWU5YjkxMmFmNTc4NDM3MzIxMmIxYzBkNTkxNjVjODNjOGY0YzQ3Yzg2NGI3NzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmYmVkNWFiODE4OWZlMjNiYWI0ODM2NTA3YjgwOWFiYTMwMGJjMmZjNmMxMzYwMjc3YWUyNTM3MDExNTNkNmEifQ"
+        },
+        {
+          "resource": "repo://config/timeline.ts#L13-L40",
+          "version": "repo-lines-v1:sha256:a9413575f6cc683b20b169fa18243708538e84f054591b5047dc19f01f133ee7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyNzU2Nzg5YzY3NTA5MTBhNDAxMzhmYzY5NGVkMDQ3YTM0ZTczZjIwYWIzZDRmNjliOTc3MDE5ZWI5NjUwYmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEzOTc2MjA4MmZiYTBjMWQ5ZmM0ZTg3ZWIwMDk0Nzg4OTUyZGNmMzYyYTI4MTcwNTY5ZGFmYWJjMzgzYTBkNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUzMjg1OTNjZDc3OTkwNGI1OTBiYmVlMTUzOTBlYTgwNTJmNGQ0OWM2OGMyM2YxNmFkODU4ODE3NWNiYTNhOWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_44da04f7bdca414dbf308c762d838e28",
+      "statement": "Climber builds scroll-to-route keypoints from elements with data-climb-t, centred on screen, skips non-increasing anchors, and interpolates linearly between them.",
+      "evidence": [
+        {
+          "resource": "repo://components/climber/Climber.tsx#L9-L53",
+          "version": "repo-lines-v1:sha256:54cb57f708de679022f5ba7c76330b67b827f53d9195e8a388d9b724b9687705:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkNmFlOTI1YzRlOGFlNzQzNGNlZjZiMzFiMmVkNDFhYzA5MTYwYjg2MWJiYzkwNjU2NzQ1NTM3NDgwYTVjNGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNjEwYWVlNzZlOWVmNzk4MDQxODk0YjhkNDk2MDY5NzUzYTk2YjU4M2I1OTEyNTVmMDQzNGFlODNiNTU0MWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzMmQwNDMyN2ZiMDY3MjRlYjBhZDViNzg4NmNmMjBlZTQ0YmM5YTJiZTkxZTJkMTM1ZjYyODNlZDIyY2M3OGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzMWQ3NDAwMDM4MTZlOWQ2MTlmZmQ5MjQxNzJiYWNhNTkwZmEyOTA1MjU4NmJiOGZiZmI2YjhiNzViM2YyNGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ba251fbd7c2c42038e39fd7d05f29f9e",
+      "statement": "TimelineSection merges milestones and film frames into one list sorted by t.",
+      "evidence": [
+        {
+          "resource": "repo://components/timeline/TimelineSection.tsx#L36-L50",
+          "version": "repo-lines-v1:sha256:0c18716cd7f19f71182c2af78350ef3395066a4a2de22d7257a1cdddd19d2a32:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExMTIzYWRiN2RjNmY1YjcxNDhkMWIzOGZiMWUwY2UyMDNmM2Y3ZGE0YjU2MTIwYzgzYTc3YzY4YThiYzRkZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE0NDFmZTI5NjhmZGZlOGY2NzM5ZDM5N2JhODJkZWRlZGQzZGIwZDMxODQwYzRlZTIxOGFmNzRiN2FmOTA4ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjllNjBhODM4ODE0YjVlOTI5ZmEwODZlZGNkMzc5NTMyNmY3OWNhMDUxYzJiNjllODAwOGYyNzE0NDJhNWNlNGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_119cd47d19db445d92ccd880d93ab90e",
+      "statement": "A content test enforces that referenced images exist in public/, milestone project slugs resolve, and timeline and film t values are sorted.",
+      "evidence": [
+        {
+          "resource": "repo://tests/content.test.ts",
+          "version": "repo-file-v1:sha256:54a472fc84a507777c2951f90794594e841fdf43c8550bffc4b8310479a67b36"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-20T00:31:46.360Z"
+  }
+}

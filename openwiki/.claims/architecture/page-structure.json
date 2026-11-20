@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:c32657074890486aabe74eaaef706c62997c7b3ae8d6e6017c5054d161847a6f",
+  "claims": [
+    {
+      "id": "claim_4bf7da89eb574dc8bfe9e128622edb34",
+      "statement": "The site is one page: a fixed background, a Climber overlay and PitchNav, and a pointer-events-none scrolling container with welcome, climb and contact sections.",
+      "evidence": [
+        {
+          "resource": "repo://app/page.tsx#L47-L102",
+          "version": "repo-lines-v1:sha256:9b9c6f06145f11cabb03984d439271079c97f35dcb2d88e239ace1f00f8c652a:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxMjUzY2Y3ZTQ4ODhkOGU0ZGQ0MzdjZDM2MDJiMTE4NGY4NjdkYjQxYWM3NmQ1ZTFkZjEyN2JkZjc5MTA5Y2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2YjVhMTI4YTk3ODg5MTk2NTkzZjBhYzhlNWUzMTIzNzBmYTE1MWEyYTBjZDg0ZTdjNTBhNTA5OTE5Njg3ZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_344ebc8635434efc9befd2bd0c0c8b5a",
+      "statement": "page.tsx rewrites the URL hash (empty, #climb, #contact) with history.replaceState based on which section is in view, and clears any hash on load.",
+      "evidence": [
+        {
+          "resource": "repo://app/page.tsx#L12-L38",
+          "version": "repo-lines-v1:sha256:d763da3fbeaa1a076fd87d700faca1916d5527876d073312480eb890926142a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyZmFmMGMwNjY5OWEwMWQ1ZGYxZWYxNjUxN2Y1MjNkODUyZjM5Njg4NDQwMGI1MWU4OWM3MzdlNThmNWU2ZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxNThjMDBiNTIwM2E1NjRlN2U3NDJkNDQ5Y2ExMjY4ZmUxYzgyOTIzYzFlODgxM2M2MjdiODc2MWE4MWU2MWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyZjcxMjQ1Nzc2ZGYxM2ZlYTVjOGUyODk0M2UzMTUxYWNlNjdlMjFjMDFkM2FjYjQ2MzAyMWMzNzMwZmMxNWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVmNDBlMjJlZWJiYTczNzJmZGUzODA2N2VlZWFmODdkMjEwZTVhNTI4MmRhMjhlODE5NzdhODRjYjA2OGZkNjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3971d7233c554f089bcb4f987bd67466",
+      "statement": "The contact form submits via fetch to a Formspree endpoint.",
+      "evidence": [
+        {
+          "resource": "repo://components/contact/ContactSection.tsx#L95-L110",
+          "version": "repo-lines-v1:sha256:f6e9be708215871aac95214510065b483d876256892abf27fa559f0b62d96dea:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmMjc2MDk3NDdmZDlmOGIxNDQzODE4N2Q2ZDM1OGM0Y2VhY2Q5YmMyMzIyYWNiZTcxMDk2MDAzY2RiMjdhYTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzZDM2MTA0NjQzYmM5NGUwZGUwMTU1NDE1YjhjY2M3Y2Y2MmZhMjIyZjAwN2I0NzA4ZjJjMjVhNzVmYmUwMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhMTgzYjdkM2RkYTg3YWRhYmM3OTJmM2M3M2RjNzAxNTZhZWI1Zjg4NDhhMzU2ZDBkOWU2NjA5NTU0ZWVkY2MifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-20T00:31:46.360Z"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:7d805aa0f14a62d03a7290d4a5a95b0dfaf2c1caad5ac2f4cfdb375bb661dc1a",
+  "claims": [
+    {
+      "id": "claim_6555ac021c064fa690cf2bf08fb55b06",
+      "statement": "The app is a single Next.js route whose content comes from typed config files in config/ (timeline, projects, climbFilm).",
+      "evidence": [
+        {
+          "resource": "repo://app/page.tsx#L1-L12",
+          "version": "repo-lines-v1:sha256:6b688879b62ccf8edd3e3ec47e5f968a8e035d695f1735667c5ad3055965aa1b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1ZmYzZTg1ZDY3MTVhN2E5ZDBmNmMxYjMyZjMwY2Q4Y2IxNDRjYzc5YzhhYmFlOTUzZWExMzc4ODlmYWUyZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyZmFmMGMwNjY5OWEwMWQ1ZGYxZWYxNjUxN2Y1MjNkODUyZjM5Njg4NDQwMGI1MWU4OWM3MzdlNThmNWU2ZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFhNDU2MzE4ZDM2MDMzOTkyYWFiNjIwZmRkNThjOGU0OGZkYzkyZDNiNDA3NzRhNjE0MzVkMjRjZWYxMTI3YjkifQ"
+        },
+        {
+          "resource": "repo://config/timeline.ts#L1-L12",
+          "version": "repo-lines-v1:sha256:4f123c161717076cbd481afecc754e60cdd77a6436e4dea8e56992a0c4da2289:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNTQwMGFjZmRkOWQ5N2UyZWQzYzlhOTI3NzIxYjk0NzAzZjAzZWVkYjk2MWNlNDNjY2JjZmE4MTVmYmZhNzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5NThjODE4N2RjZDc3OGY3ZTM5YWVmMTFkNzc4MGViMjdiY2Y5YzNmYjkzNDVmYjI2MWFmMjVhNWI4YmM4YzAifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-20T00:31:46.360Z"
+  }
+}
