@@ -40,11 +40,12 @@ Shared across Blake's repos. Repo-specific sections of this file override these 
 
 ### Commands
 
-Exact commands are listed elsewhere in this file. Every repo has `setup`, `dev`, `lint`, `typecheck`, `test`, `verify`; `services` if it has backing services.
+Exact commands are listed elsewhere in this file. Every repo has `bootstrap`, `dev`, `lint`, `typecheck`, `test`, `verify`; `services` if it has backing services.
 
-- Fresh worktree or sandbox: run `setup` first. It never starts services.
+- Fresh worktree or sandbox: run `bootstrap` first. It never starts services. Never run `pnpm setup` (pnpm builtin; edits shell config).
 - Start services only when the task needs them (`services`, or `dev`).
 - Never hardcode ports. HTTP via portless (`PORT`); databases via `*_URL` vars in `.env`.
+- Agents and sandboxes run `dev` with `PORTLESS_HTTPS=0` (no local CA or sudo) or `PORTLESS=0` (no proxy).
 - Run `verify` before claiming done.
 
 ### Testing
@@ -96,6 +97,10 @@ Every repo may go public, and history is public with it.
 - Verify with synthetic data. If a real-data check is needed, run it locally and commit only the result, not the data.
 - Before a repo goes public: `dev-home/public-check.sh <repo> --history` must be clean. If history has hits, publish a fresh repo from a squashed commit (or rewrite history) before flipping visibility.
 - Private words to scan for (names, places) go in `~/.config/dev-home/private-words`, never in a repo.
+
+### Docs
+
+- Decision records (`docs/adr/`) and design docs (`docs/design/`) use OKF frontmatter with a `type`; `GLOSSARY.md` stays plain. Format and status mapping: dev-home `STANDARDS.md`, "Docs convention".
 
 <!-- dev-home:standards:end -->
 
