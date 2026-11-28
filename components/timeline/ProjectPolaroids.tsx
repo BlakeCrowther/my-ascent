@@ -88,7 +88,7 @@ export function ProjectPolaroids({
 
   return (
     <div className="pointer-events-auto">
-      <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-3 pt-5 pb-3 [scrollbar-width:none] sm:flex-wrap sm:justify-center sm:gap-5 sm:overflow-visible md:mx-0 md:grid md:grid-cols-4 md:gap-x-[1.5vw] md:gap-y-6 md:px-0 md:[&>*]:w-full md:[&>*:nth-child(even)]:translate-y-6">
+      <div className="-mx-1 flex snap-x snap-mandatory [scrollbar-width:none] gap-4 overflow-x-auto px-3 pt-5 pb-3 sm:flex-wrap sm:justify-center sm:gap-5 sm:overflow-visible md:mx-0 md:grid md:grid-cols-4 md:gap-x-[1.5vw] md:gap-y-6 md:px-0 md:[&>*]:w-full md:[&>*:nth-child(even)]:translate-y-6">
         {items.map((project, i) => (
           <Polaroid
             key={project.slug}
@@ -157,7 +157,7 @@ function Gallery({
         )}
       </button>
       {media.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
+        <div className="flex [scrollbar-width:none] gap-2 overflow-x-auto pb-1">
           {media.map((src, i) => (
             <button
               key={src}
