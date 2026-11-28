@@ -1,0 +1,26 @@
+# Synced from dev-home by sync-standards.sh. Edit it there, not here.
+# Adds every new issue and PR in this repo to the Dev Board user project.
+# GitHub's free plan allows one built-in auto-add workflow per project, so each repo runs this instead.
+name: dev-board
+on:
+  issues:
+    types: [opened, reopened, transferred]
+  # pull_request_target so PRs from forks also get the secret; nothing is checked out or run from the PR.
+  pull_request_target:
+    types: [opened, reopened]
+permissions: {}
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    env:
+      DEV_BOARD_TOKEN: ${{ secrets.DEV_BOARD_TOKEN }}
+    steps:
+      - name: Skip without a token
+        if: env.DEV_BOARD_TOKEN == ''
+        run: echo "::warning::DEV_BOARD_TOKEN is not set; run set-dev-board-secret.sh in dev-home"
+      - uses: actions/add-to-project@f2c1f1fa649a891be84948ea89b5dfba1526ef05 # v2.0.1
+        if: env.DEV_BOARD_TOKEN != ''
+        with:
+          project-url: https://github.com/users/BlakeCrowther/projects/1
+          github-token: ${{ env.DEV_BOARD_TOKEN }}

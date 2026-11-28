@@ -65,7 +65,7 @@ Exact commands are listed elsewhere in this file. Every repo has `bootstrap`, `d
 - Commit subject `<type>(<scope>): <summary>`, imperative, lowercase, no period. Body says why.
 - Issue titles are plain prose naming the outcome. Never a type prefix (`feat:`, `docs:`, `epic:`): the `epic`/`feature`/`task` label and sub-issue links carry type and hierarchy. The prefix belongs to commits, branches and PR titles only.
 - PR title uses the commit subject format. PR body: Why, What, Testing, Evidence, Notes.
-- Add each new PR to the Dev Board project: `gh project item-add 1 --owner BlakeCrowther --url <pr-url>` (skip if `gh` lacks the `project` scope).
+- New issues and PRs reach the Dev Board project through `.github/workflows/dev-board.yml`. If it didn't run (no secret yet), add the item: `gh project item-add 1 --owner BlakeCrowther --url <url>` (skip if `gh` lacks the `project` scope).
 - Evidence: screenshots and a short recording for UI changes; command and output for API/CLI/data changes. Media goes on the PR, never in git (`.artifacts/` is gitignored).
 
 ### Code comments
